@@ -63,6 +63,8 @@ img.center{
 .header-tag-a{
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
 .header-tag-logo{
