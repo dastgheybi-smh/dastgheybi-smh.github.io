@@ -59,12 +59,12 @@ img.center{
     display: flex;
 }
 
-#gh, #ss{
+.header-tag-a{
     display: flex;
     align-items: center;
 }
 
-#gh-logo, #mz-logo{
+.header-tag-logo{
     width: 2.5rem;
     height: 2.5rem;
 }
