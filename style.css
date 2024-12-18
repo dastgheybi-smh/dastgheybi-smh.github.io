@@ -31,7 +31,8 @@ img.center{
 
 #profile-header{
     border-radius: 100%;
-    width: 5rem
+    width: 5rem;
+    height: 5rem
 }
 
 #profile-header-main{
@@ -69,3 +70,6 @@ img.center{
     height: 2.5rem;
 }
 
+header{
+    background-color: rgb(226, 226, 226);
+}
