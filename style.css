@@ -8,7 +8,7 @@
   }
 
 body{
-    font-family: Doto;
+    font-family: Doto, serif;
     background-color: rgb(172, 172, 172);
 }
 
@@ -46,18 +46,14 @@ img.center{
 }
 
 #header-tags{
-    right: 0px;
+    right: 0;
     margin-right: 0.55rem;
+    /*direction: rtl;*/
 }
 
 #header-tags ul li{
     display: inline;
     margin-right: 5rem;
-}
-
-#header, header{
-    width: 100%;
-    display: flex;
 }
 
 .header-tag-a{
@@ -72,6 +68,12 @@ img.center{
     height: 2.5rem;
 }
 
-header{
+#header{
     background-color: rgb(226, 226, 226);
+    width: 95%;
+    display: flex;
+    margin: 1%;
+    border-radius: 1.5vw;
+    align-self: center;
+
 }
