@@ -1,7 +1,7 @@
 Hello
 
-This is my test site
+After My site I have game made by phaser.
 
-This is all of my knowledge from html and css in 12/2024
+It's a modified version of "Phaser First Game"
 
-If you have any pull request might help my site, I accept it :)
+Have a nice time with game :)

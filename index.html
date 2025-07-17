@@ -1,52 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iRIP | Pain</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="header">
-        <div id="profile-header-main">
-            <a href="https://dastgheybi-smh.github.io">
-                <img src="prof.png" alt="profile-header" id="profile-header">
-            </a>
-        </div>
-        <div id="header-tags">
-            <ul>
-                <li>
-                    <a href="https://mizanhedayat.ir/" class="header-tag-a">
-                        <img src="mizan.png" alt="mizan logo" class="header-tag-logo">
-                        <h3>
-                            My school
-                        </h3>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/dastgheybi-smh" class="header-tag-a">
-                        <img src="github.png" alt="github logo" class="header-tag-logo">
-                        <h3>
-                            My Github page
-                        </h3>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="center">
-        <h1>
-            Hello, I'm iRIP | Pain
-        </h1>
-        <h4>
-            I'm a programmer, a gamer, and a RIP
-        </h4>
-    </div>
-    <div class="center">
-        <img src="prof.png" alt="My Profile" id="prof" class="center">
-    </div>
-    <p>
-        © Sayed Mohammad Hassan Dastgheybi. All rights reserved.
-    </p>
-</body>
-</html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My First Game</title>
+        <style>
+            /* Reset CSS: Please avoid making changes here unless you know what you're doing :) */
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+    
+            body {
+                line-height: 1;
+                font-family: Arial, sans-serif;
+                background-color: #040218;
+            }
+    
+            ol, ul {
+                list-style: none;
+            }
+    
+            img, video {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+    
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="game-container"></div>
+        <script src="./phaser.js"></script>
+        <script type="module" src="./src/main.js"></script>
+    </body>
+    </html>
