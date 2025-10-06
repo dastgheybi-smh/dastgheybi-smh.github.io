@@ -29,8 +29,8 @@
         const iframe = document.getElementById("x");
         iframe.src = "https://dastgheybi-smh.github.io/mtemplate/" + page;
         iframe.onload = function () {
-            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-            iframe.style.width = iframe.contentWindow.document.body.scrollWidth + 'px';
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight * 1.1 + 'px';
+            iframe.style.width = iframe.contentWindow.document.body.scrollWidth * 1.1 + 'px';
         };
 
     }
