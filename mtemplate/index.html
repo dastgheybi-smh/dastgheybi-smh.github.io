@@ -17,6 +17,7 @@
         }
         iframe{
             border: 0;
+            widith:
         }
     </style>
 </head>
@@ -27,6 +28,11 @@
     function redirect(page) {
         const iframe = document.getElementById("x");
         iframe.src = "https://dastgheybi-smh.github.io/mtemplate/" + page;
+        iframe.onload = function () {
+            iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            iframe.style.width = iframe.contentWindow.document.body.scrollWidth + 'px';
+        };
+
     }
     redirect("loading")
 </script>
