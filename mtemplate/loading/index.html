@@ -2,7 +2,7 @@
 <script>
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
-    let plan = null;
+    plan = {};
     fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
         .then(res => res.json())
         .then(res => {
