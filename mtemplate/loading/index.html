@@ -1,1 +1,15 @@
-<!DOCTYPE html><html lang="fa"><head><link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" /><link href="main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v12_2"><div class="v8_57"></div><span class="v9_84">طراحی و پیاده سازی توسط گروه نوجو</span><span class="v9_85">نسخه : ۱.۰.۰</span><div class="name"></div><div class="v9_87"><div class="v9_88"></div><div class="v9_89"></div><div class="v9_90"></div></div><span class="v8_59">در حال بارگذاری</span><span class="v9_101">امام علی (ع) : عاقل کسی است که کارهایش را با تدبیر و برنامه‌ریزی پیش ببرد. </span><div class="v8_69"></div><div class="v9_103"></div></div></body></html>
+<!DOCTYPE html><html lang="fa"><head><link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" /><link href="main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v12_2"><div class="v8_57"></div><span class="v9_84">طراحی و پیاده سازی توسط گروه نوجو</span><span class="v9_85">نسخه : ۱.۰.۰</span><div class="name"></div><div class="v9_87"><div class="v9_88"></div><div class="v9_89"></div><div class="v9_90"></div></div><span class="v8_59">در حال بارگذاری</span><span class="v9_101">امام علی (ع) : عاقل کسی است که کارهایش را با تدبیر و برنامه‌ریزی پیش ببرد. </span><div class="v8_69"></div><div class="v9_103"></div></div></body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const grade = params.get('grade');
+    fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
+        .then(res => res.json())
+        .then(res => {
+            this.plane = res[grade];
+        });
+
+    parent.postMessage(["loading_plan"], plane);
+    parent.postMessage(["loading_redirect"], "plane");
+
+</script>
+</html>

@@ -17,7 +17,6 @@
         }
         iframe{
             border: 0;
-            widith:
         }
     </style>
 </head>
@@ -32,8 +31,30 @@
             iframe.style.height = iframe.contentWindow.document.body.scrollHeight * 1.1 + 'px';
             iframe.style.width = iframe.contentWindow.document.body.scrollWidth * 1.1 + 'px';
         };
-
     }
-    redirect("loading")
+
+    let sender = "";
+    let sent_data = null;
+    let plan = null;
+
+    window.addEventListener("message", function (event) {
+        sender = event.data[0];
+        sent_data = event.data[1];
+
+        if (sender === "loading_plan"){
+            plan = sent_data
+        }
+        else if (sender === "loading_redirect"){
+            if (plan !== null){
+                redirect(sent_data);
+            }
+        }
+    })
+
+    const params = new URLSearchParams(window.location.search);
+    const grade = params.get('grade');
+    redirect("loading?grade=" + grade);
+
+
 </script>
 </html>
