@@ -33,19 +33,25 @@
         };
     }
 
+    console.log("hello world");
+
     let sender = "";
     let sent_data = null;
     let plan = null;
 
     window.addEventListener("message", function (event) {
+        console.log("message sent", event.data);
         sender = event.data[0];
         sent_data = event.data[1];
 
         if (sender === "loading_plan"){
+            console.log("plan loaded");
             plan = sent_data
         }
         else if (sender === "loading_redirect"){
+            console.log("plan redirected");
             if (plan !== null){
+                console.log("redirected");
                 redirect(sent_data);
             }
         }
