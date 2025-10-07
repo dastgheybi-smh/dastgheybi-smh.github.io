@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه ریزی</title>
+    <link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Vazirmatn, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 360px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .icon {
+            width: 64px;
+            height: 64px;
+            background: #000;
+            margin: 0 auto 16px auto;
+            border-radius: 12px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn.manual {
+            background: #141414;
+        }
+
+        .btn.manual:hover {
+            background: #333;
+        }
+
+        .btn.ai {
+            background: #09966b;
+        }
+
+        .btn.ai:hover {
+            background: #0b7f5a;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="icon"></div>
+    <h2>برنامه هفته بعدت چیه؟</h2>
+    <p>میتونی از بین برنامه‌ریزی دستی و برنامه‌ریزی با هوش مصنوعی یدونه رو انتخاب کنی</p>
+    <div class="buttons">
+        <button class="btn manual">برنامه‌ریزی دستی</button>
+        <button class="btn ai">برنامه‌ریزی با AI</button>
+    </div>
+</div>
+</body>
+</html>
