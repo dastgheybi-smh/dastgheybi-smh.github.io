@@ -2,15 +2,15 @@
 <script>
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
-    let plan = [null, null];
     fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
         .then(res => res.json())
         .then(res => {
-            plan[0] = res[grade];
+            let plan = res[grade];
+            parent.postMessage(["loading_plan", plan[0]]);
+            parent.postMessage(["loading_redirect", "main"]);
         });
 
-    parent.postMessage(["loading_plan", plan[0]]);
-    parent.postMessage(["loading_redirect", "main"]);
+
 
 </script>
 </html>
