@@ -87,10 +87,15 @@
     <h2>برنامه هفته بعدت چیه؟</h2>
     <p>میتونی از بین برنامه‌ریزی دستی و برنامه‌ریزی با هوش مصنوعی یدونه رو انتخاب کنی</p>
     <div class="buttons">
-        <button id="manual" onclick="console.log('hell')" class="btn manual">برنامه‌ریزی دستی</button>
+        <button id="manual"  class="btn manual">برنامه‌ریزی دستی</button>
         <button class="btn ai" onclick="console.log('low')"  disabled>برنامه‌ریزی با AI</button>
     </div>
 </div>
 </body>
-
+<script>
+    const manual = document.getElementById('manual');
+    manual.addEventListener('click', () => {
+        parent.postMessage(["main_click", ""])
+    })
+</script>
 </html>

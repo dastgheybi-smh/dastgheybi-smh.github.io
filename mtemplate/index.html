@@ -41,23 +41,21 @@
         sender = event.data[0];
         sent_data = event.data[1];
 
-        if (sender === "loading_plan"){
+         if (sender === "main_click"){
+            redirect("sch?grade=" + grade);
+        }
+
+        else if (sender === "loading_plan"){
             console.log("plan loaded");
             plan = sent_data
         }
-        else if (sender === "loading_redirect"){
-            console.log("plan redirected");
-            if (plan !== null){
-                console.log("redirected");
-                redirect(sent_data);
-            }
-        }
+
         else if (sender === "main"){}
     })
 
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
-    redirect("loading?grade=" + grade);
+    redirect("main");
 
 
 </script>
