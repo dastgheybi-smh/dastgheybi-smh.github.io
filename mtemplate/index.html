@@ -15,6 +15,9 @@
             justify-content: center;
             align-items: center;
         }
+        body {
+            background-color: white;
+        }
     </style>
 </head>
 <body>
@@ -49,6 +52,7 @@
                 redirect(sent_data);
             }
         }
+        else if (sender === "main"){}
     })
 
     const params = new URLSearchParams(window.location.search);

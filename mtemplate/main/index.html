@@ -79,10 +79,6 @@
         .btn.ai {
             background: #09966b;
         }
-
-        .btn.ai:hover {
-            background: #0b7f5a;
-        }
     </style>
 </head>
 <body>
@@ -91,9 +87,10 @@
     <h2>برنامه هفته بعدت چیه؟</h2>
     <p>میتونی از بین برنامه‌ریزی دستی و برنامه‌ریزی با هوش مصنوعی یدونه رو انتخاب کنی</p>
     <div class="buttons">
-        <button class="btn manual">برنامه‌ریزی دستی</button>
-        <button class="btn ai">برنامه‌ریزی با AI</button>
+        <button id="manual" onclick="console.log('hell')" class="btn manual">برنامه‌ریزی دستی</button>
+        <button class="btn ai" onclick="console.log('low')"  disabled>برنامه‌ریزی با AI</button>
     </div>
 </div>
 </body>
+
 </html>
