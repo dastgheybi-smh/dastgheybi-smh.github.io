@@ -53,8 +53,8 @@
                 for (let i = 0; i < 7; i++) {
                     let temp = my_plan[days[index]];
                     if (temp[i] === null) {
-                        document.getElementById(index_translate[i]).style.backgroundColor = "#fff6df";
-                        document.getElementById(index_translate[i]).style.borderColor = "#FF8300";
+                        document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#fff6df";
+                        document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
                     }
                 }
                 index += 1;
