@@ -1,4 +1,35 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head><link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" /><link href="main.css" rel="stylesheet" /><title>Document</title></head><body><div class="v12_4"><div class="v9_105"></div><div class="v9_189"></div><div class="v9_155"></div><span class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span><div class="v9_158"></div><span class="v9_159">زنگ دوم - ریاضی</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span><div class="v9_162"></div><span class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span><div class="v9_166"></div><span class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span><div class="v9_191"></div><span class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span><div class="v9_195"></div><span class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span><div class="v9_198"></div><span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span><span class="v10_57">یکشنبه</span><span class="v10_58">۱۴۰۵.۵.۱</span><div class="v10_59"></div><span class="v10_63">روز بعدی</span><div class="v10_60"></div><span class="v10_61">روز قبلی</span></div></body>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" />
+    <link href="main.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+<div class="v12_4">
+    <div class="v9_105"></div>
+    <div class="v9_189"></div>
+    <div class="v9_155"></div>
+    <span class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_158"></div>
+    <span class="v9_159">زنگ دوم - ریاضی</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_162"></div>
+    <span class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_166"></div>
+    <span class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_191"></div>
+    <span class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_195"></div>
+    <span class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
+    <div class="v9_198"></div>
+    <span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
+    <span class="v10_57">یکشنبه</span><span class="v10_58">۱۴۰۵.۵.۱</span>
+    <div class="v10_59"></div>
+    <span class="v10_63">روز بعدی</span>
+    <div class="v10_60"></div>
+    <span class="v10_61">روز قبلی</span>
+</div>
+</body>
 <script>
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
@@ -7,7 +38,27 @@
         .then(res => {
             let plan = res[grade];
             parent.postMessage(["loading_plan", plan[0]]);
-            console.log(parent.plan)
+            const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
+            const weekday = document.getElementsByClassName("v10_57")[0];
+            const index_translate = ["v9_162", "v9_158", "v9_155", "v9_166", "v9_198", "v9_195", "v9_191"];
+            let my_plan = {};
+            for (let day of days) {
+                my_plan[day] = [null, null, null, null, null, null, null];
+            }
+
+            let index = 0
+
+            while (index < days.length) {
+                weekday.innerHTML = days[index]
+                for (let i = 0; i < 7; i++) {
+                    let temp = my_plan[days[index]];
+                    if (temp[i] === null) {
+                        document.getElementById(index_translate[i]).style.backgroundColor = "#fff6df";
+                        document.getElementById(index_translate[i]).style.borderColor = "#FF8300";
+                    }
+                }
+                index += 1;
+            }
         });
 
 </script>
