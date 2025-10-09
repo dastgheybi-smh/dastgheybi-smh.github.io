@@ -23,17 +23,16 @@
     <span class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
     <div class="v9_198"></div>
     <span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
-    <span class="v10_57">یکشنبه</span><span class="v10_58">۱۴۰۵.۵.۱</span>
-    <div class="v10_59"></div>
-    <button onclick="day(1)" class="v10_63">روز بعدی</button>
-    <div class="v10_60"></div>
-    <button onclick="day(-1)" class="v10_61">روز قبلی</button>
+    <div onclick="day(1)" class="v10_59"></div>
+    <span  class="v10_63">روز بعدی</span>
+    <div onclick="day(-1)" class="v10_60"></div>
+    <span  class="v10_61">روز قبلی</span>
 </div>
 </body>
 <script>
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
-    let index = 0;
+    let index = 1;
 
     const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
     const weekday = document.getElementsByClassName("v10_57")[0];
@@ -76,6 +75,7 @@
         .then(res => {
             let plan = res[grade];
             parent.postMessage(["loading_plan", plan[0]]);
+            day(-1)
         });
 
 </script>
