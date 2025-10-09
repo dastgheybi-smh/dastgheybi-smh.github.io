@@ -25,14 +25,18 @@
     <span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
     <span class="v10_57">یکشنبه</span><span class="v10_58">۱۴۰۵.۵.۱</span>
     <div class="v10_59"></div>
-    <span class="v10_63">روز بعدی</span>
+    <button onclick="day(1)" class="v10_63">روز بعدی</button>
     <div class="v10_60"></div>
-    <span class="v10_61">روز قبلی</span>
+    <button onclick="day(-1)" class="v10_61">روز قبلی</button>
 </div>
 </body>
 <script>
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
+    let index = 0;
+
+
+
     fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
         .then(res => res.json())
         .then(res => {
@@ -46,9 +50,20 @@
                 my_plan[day] = [null, null, null, null, null, null, null];
             }
 
-            let index = 0
+            my_plan["یکشنبه"][2] = "hello"
 
-            while (index < days.length) {
+            function day(dy) {
+                index += dy;
+                if (index < 0) {
+                    alert("روز اول هستید.");
+                    index -= dy;
+                    return;
+                }
+                if (index > 4) {
+                    alert("روز اخر هستید.");
+                    index -= dy;
+                    return;
+                }
                 weekday.innerHTML = days[index]
                 for (let i = 0; i < 7; i++) {
                     let temp = my_plan[days[index]];
@@ -57,7 +72,6 @@
                         document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
                     }
                 }
-                index += 1;
             }
         });
 
