@@ -25,7 +25,7 @@
     <span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
     <span class="v10_57">یکشنبه</span>
     <button onclick="day(1)" class="v10_59"></button>
-    <span onclick="day(-1)" class="v10_63">روز بعدی</span>
+    <span onclick="day(1)" class="v10_63">روز بعدی</span>
     <button onclick="day(-1)" class="v10_60"></button>
     <span onclick="day(-1)" class="v10_61">روز قبلی</span>
 </div>
@@ -88,7 +88,7 @@
         .then(res => {
             let plan = res[grade];
             parent.postMessage(["loading_plan", plan[0]]);
-            document.addEventListener("load", (event) => {day(-1)})
+            day(-1)
         });
 
 </script>
