@@ -35,44 +35,43 @@
     const grade = params.get('grade');
     let index = 0;
 
+    const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
+    const weekday = document.getElementsByClassName("v10_57")[0];
+    const index_translate = ["v9_162", "v9_158", "v9_155", "v9_166", "v9_198", "v9_195", "v9_191"];
+    let my_plan = {};
+    for (let day of days) {
+        my_plan[day] = [null, null, null, null, null, null, null];
+    }
 
+    my_plan["یکشنبه"][2] = "hello"
+
+    function day(dy) {
+        index += dy;
+        if (index < 0) {
+            alert("روز اول هستید.");
+            index -= dy;
+            return;
+        }
+        if (index > 4) {
+            alert("روز اخر هستید.");
+            index -= dy;
+            return;
+        }
+        weekday.innerHTML = days[index]
+        for (let i = 0; i < 7; i++) {
+            let temp = my_plan[days[index]];
+            if (temp[i] === null) {
+                document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#fff6df";
+                document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
+            }
+        }
+    }
 
     fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
         .then(res => res.json())
         .then(res => {
             let plan = res[grade];
             parent.postMessage(["loading_plan", plan[0]]);
-            const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
-            const weekday = document.getElementsByClassName("v10_57")[0];
-            const index_translate = ["v9_162", "v9_158", "v9_155", "v9_166", "v9_198", "v9_195", "v9_191"];
-            let my_plan = {};
-            for (let day of days) {
-                my_plan[day] = [null, null, null, null, null, null, null];
-            }
-
-            my_plan["یکشنبه"][2] = "hello"
-
-            function day(dy) {
-                index += dy;
-                if (index < 0) {
-                    alert("روز اول هستید.");
-                    index -= dy;
-                    return;
-                }
-                if (index > 4) {
-                    alert("روز اخر هستید.");
-                    index -= dy;
-                    return;
-                }
-                weekday.innerHTML = days[index]
-                for (let i = 0; i < 7; i++) {
-                    let temp = my_plan[days[index]];
-                    if (temp[i] === null) {
-                        document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#fff6df";
-                        document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
-                    }
-                }
-            }
         });
 
 </script>
