@@ -9,25 +9,37 @@
 <div class="v12_4">
     <div class="v9_105"></div>
     <div class="v9_189"></div>
-    <div class="v9_155"></div>
-    <span class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_158"></div>
-    <span class="v9_159">زنگ دوم - ریاضی</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_162"></div>
-    <span class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_166"></div>
-    <span class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_191"></div>
-    <span class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_195"></div>
-    <span class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
-    <div class="v9_198"></div>
-    <span class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_155"></div>
+    <span onclick="open_dialog()"  class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_158"></div>
+    <span onclick="open_dialog()"  class="v9_159">زنگ دوم - ریاضی</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_162"></div>
+    <span onclick="open_dialog()"  class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_166"></div>
+    <span onclick="open_dialog()"  class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_191"></div>
+    <span onclick="open_dialog()"  class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_195"></div>
+    <span onclick="open_dialog()"  class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog()" class="v9_198"></div>
+    <span onclick="open_dialog()"  class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
     <span class="v10_57">یکشنبه</span>
     <button onclick="day(1)" class="v10_59"></button>
     <span onclick="day(1)" class="v10_63">روز بعدی</span>
     <button onclick="day(-1)" class="v10_60"></button>
     <span onclick="day(-1)" class="v10_61">روز قبلی</span>
+    <div id="classes" style="display: none;">
+        <div class="v9_237"></div>
+        <div class="v9_239"></div>
+        <span class="v9_241">بین کلاس های موجود یکی رو انتخاب کن</span>
+        <div class="name"></div>
+        <div class="v9_243"></div>
+        <div class="v9_257"></div>
+        <span class="v9_245">علوم</span><span class="v9_247">ظرفیت باقی مانده : ۵ نفر</span><span class="v9_266">ریاضی</span><span class="v9_267">ظرفیت باقی مانده : ۲۰ نفر</span>
+        <div class="v9_253"></div>
+        <span class="v9_254">عربی</span><span class="v9_255">قبلا انتخابش کرده بودی</span>
+        <div onclick="close_dialog()" class="v9_272"></div>
+    </div>
 </div>
 </body>
 <script>
@@ -81,6 +93,18 @@
                 console.log(" - " + temp)
             }
         }
+    }
+
+    function open_dialog() {
+        const classes = document.getElementById("classes");
+
+        classes.style.display = "block";
+    }
+
+    function close_dialog() {
+        const classes = document.getElementById("classes");
+
+        classes.style.display = "none";
     }
 
     fetch('https://live-box.storage.c2.liara.space/file_transfer.json')
