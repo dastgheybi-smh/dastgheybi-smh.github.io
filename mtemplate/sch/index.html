@@ -56,17 +56,13 @@
     const index_translate = ["v9_162", "v9_158", "v9_155", "v9_166", "v9_198", "v9_195", "v9_191"];
     const times_translate = ["زنگ اول", "زنگ دوم", "زنگ سوم", "زنگ چهارم", "زنگ پنچم", "زنگ ششم", "زنگ آخر"];
     const time_index_translate = ["v9_163", "v9_159", "v9_156", "v9_167", "v9_199", "v9_196", "v9_192"];
-    let my_plan = {};
-    for (let day of days) {
-        my_plan[day] = [null, null, null, null, null, null, null];
+    const grid_translate = ["v9_253", "v9_243", "v11_253", "v11_243"]
+    const grid_name_translate = ["v9_254", "v9_245", "v11_254", "v11_245"]
+    const grid_desc_translate = ["v9_255", "v9_247", "v11_255", "v11_247"]
+    let my_plan = [];
+    for (let day = 0; day < days.length; day++) {
+        my_plan[day] = ["رایانه A", null, null, null, null, null, null];
     }
-
-    my_plan["یکشنبه"][2] = "ریاضی A"
-    my_plan["شنبه"][0] = "ریاضی C"
-    my_plan["دوشنبه"][6] = "ریاضی F"
-    my_plan["چهارشنبه"][4] = "ریاضی F"
-    my_plan["سه شنبه"][6] = "عربی B"
-    my_plan["شنبه"][6] = "مفاهیم A"
 
     function day(dy) {
         index += dy;
@@ -80,7 +76,7 @@
         }
         weekday.innerHTML = days[index]
         for (let i = 0; i < 7; i++) {
-            let temp = my_plan[days[index]];
+            let temp = my_plan[index];
             console.log(temp);
             document.getElementsByClassName(time_index_translate[i])[0].innerHTML = times_translate[i];
             console.log(times_translate[i]);
@@ -97,6 +93,10 @@
         }
     }
 
+    function domc(classname, ind=0) {
+        return document.getElementsByClassName(classname)[ind];
+    }
+
     function open_dialog(lesson) {
         const classes = document.getElementById("classes");
 
@@ -106,12 +106,64 @@
         let lessons = plan[indexed_les];
 
         console.log(lessons)
+
+        for (let i = 0; i < 4; i++){
+            domc(grid_translate[i]).style.display = "none";
+            domc(grid_desc_translate[i]).style.display = "none";
+            domc(grid_name_translate[i]).style.display = "none";
+            domc(grid_translate[i]).onclick = null;
+            domc(grid_desc_translate[i]).onclick = null;
+            domc(grid_name_translate[i]).onclick = null;
+            domc(grid_translate[i]).className = grid_translate[i];
+            domc(grid_desc_translate[i]).className = grid_desc_translate[i];
+            domc(grid_desc_translate[i]).innerHTML = "";
+            domc(grid_name_translate[i]).className = grid_name_translate[i];
+        }
+
+        for (let i = 0; i < lessons.length; i++) {
+            let listen = lessons[i];
+            if (listen !== undefined){
+                domc(grid_translate[i]).style.display = "block";
+                domc(grid_desc_translate[i]).style.display = "block";
+                domc(grid_name_translate[i]).style.display = "block";
+
+                domc(grid_name_translate[i]).innerHTML = listen;
+
+                let used = false;
+                for (let dy of my_plan) {
+                    for (let time of dy) {
+                        console.log(time + " = " + listen   );
+                        if (time === listen) {
+                            used = true;
+                            break;
+                        }
+                    }
+                }
+                console.log(used)
+                if (used) {
+                    domc(grid_translate[i]).className = grid_translate[i] + " v11_red"
+                    console.log(domc(grid_translate[i]).className)
+                    domc(grid_desc_translate[i]).innerHTML = "قبلا انتخابش کرده بودی!";
+                }
+                else {
+                    domc(grid_translate[i]).className = grid_translate[i] + " v11_green";
+                    domc(grid_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
+                    domc(grid_desc_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
+                    domc(grid_name_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
+                }
+            }
+
+        }
     }
 
-    function close_dialog() {
+    function close_dialog(name=null, lesson=null) {
         const classes = document.getElementById("classes");
 
         classes.style.display = "none";
+        if (name !== null) {
+            my_plan[days[index]][lesson] = name;
+            day(0)
+        }
     }
 
     fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
