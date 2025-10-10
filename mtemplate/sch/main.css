@@ -533,7 +533,7 @@ body {
   width: 108px;
   color: rgba(20,20,20,1);
   position: absolute;
-  top: 272px;
+  top: 288px;
   left: 192px;
   font-family: Vazirmatn;
   font-weight: Regular;
@@ -547,7 +547,7 @@ body {
   background: rgba(255,188,31,0.14000000059604645);
   opacity: 1;
   position: absolute;
-  top: 245px;
+  top: 260px;
   left: 190px;
   border: 1px solid rgba(255,131,0,1);
   border-radius: 13px;
@@ -560,7 +560,7 @@ body {
   background: rgba(197,7,7,0.14000000059604645);
   opacity: 1;
   position: absolute;
-  top: 245px;
+  top: 260px;
   left: 60px;
   border: 1px solid rgba(197,7,7,1);
   border-radius: 13px;
@@ -570,7 +570,7 @@ body {
   width: 49px;
   color: rgba(84,51,51,1);
   position: absolute;
-  top: 245px;
+  top: 260px;
   left: 121px;
   font-family: Vazirmatn;
   font-weight: Black;
@@ -582,7 +582,7 @@ body {
   width: 108px;
   color: rgba(20,20,20,1);
   position: absolute;
-  top: 272px;
+  top: 288px;
   left: 62px;
   font-family: Vazirmatn;
   font-weight: Regular;
