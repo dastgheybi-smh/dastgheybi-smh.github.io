@@ -9,20 +9,20 @@
 <div class="v12_4">
     <div class="v9_105"></div>
     <div class="v9_189"></div>
-    <div  onclick="open_dialog()" class="v9_155"></div>
-    <span onclick="open_dialog()"  class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_158"></div>
-    <span onclick="open_dialog()"  class="v9_159">زنگ دوم - ریاضی</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_162"></div>
-    <span onclick="open_dialog()"  class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_166"></div>
-    <span onclick="open_dialog()"  class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_191"></div>
-    <span onclick="open_dialog()"  class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_195"></div>
-    <span onclick="open_dialog()"  class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog()" class="v9_198"></div>
-    <span onclick="open_dialog()"  class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(2)" class="v9_155"></div>
+    <span onclick="open_dialog(2)"  class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(1)" class="v9_158"></div>
+    <span onclick="open_dialog(1)"  class="v9_159">زنگ دوم</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(0)" class="v9_162"></div>
+    <span onclick="open_dialog(0)"  class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(3)" class="v9_166"></div>
+    <span onclick="open_dialog(3)"  class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(6)" class="v9_191"></div>
+    <span onclick="open_dialog(6)"  class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(5)" class="v9_195"></div>
+    <span onclick="open_dialog(5)"  class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
+    <div  onclick="open_dialog(4)" class="v9_198"></div>
+    <span onclick="open_dialog(4)"  class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
     <span class="v10_57">یکشنبه</span>
     <button onclick="day(1)" class="v10_59"></button>
     <span onclick="day(1)" class="v10_63">روز بعدی</span>
@@ -43,6 +43,7 @@
         <span class="v11_254">عربی</span><span class="v11_255">قبلا انتخابش کرده بودی</span>
         <div onclick="close_dialog()" class="v9_272"></div>
     </div>
+    <div id="onload" class="v9_237"></div>
 </div>
 </body>
 <script>
@@ -96,10 +97,15 @@
         }
     }
 
-    function open_dialog() {
+    function open_dialog(lesson) {
         const classes = document.getElementById("classes");
 
         classes.style.display = "block";
+
+        let indexed_les = (index * 7) + lesson;
+        let lessons = plan[indexed_les];
+
+        console.log(lessons)
     }
 
     function close_dialog() {
@@ -111,9 +117,13 @@
     fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
         .then(res => res.json())
         .then(res => {
-            let plan = res[grade];
-            parent.postMessage(["loading_plan", plan[0]]);
+            plan = res[parseInt(grade)];
+            parent.postMessage(["loading_plan", plan]);
+            console.log("plan is " + plan);
+            console.log("grade is " + grade);
+            console.log("grade type is" + typeof grade);
             day(-1)
+            document.getElementById("onload").style.display = "none";
         });
 
 </script>
