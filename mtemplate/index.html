@@ -23,6 +23,7 @@
 <body>
 <iframe id="x" src=""></iframe>
 </body>
+<script src="https://tapi.bale.ai/miniapp.js?3"></script>
 <script>
     function redirect(page) {
         const iframe = document.getElementById("x");
@@ -50,7 +51,10 @@
             plan = sent_data
         }
 
-        else if (sender === "main"){}
+        else if (sender === "main_end"){
+            my_plan = sent_data
+            window.Bale.WebApp.sendData(my_plan)
+        }
     })
 
     const params = new URLSearchParams(window.location.search);

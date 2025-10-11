@@ -72,7 +72,18 @@
         }
         if (index > 4) {
             index -= dy;
-            return;
+            let nulled = false;
+            for (let i of my_plan) {
+                for (const iElement of i) {
+                    if (iElement === null) {
+                        nulled = true;
+                        break;
+                    }
+                }
+            }
+            if (!nulled) {
+                parent.postMessage(["main_end", my_plan])
+            }
         }
         weekday.innerHTML = days[index]
         for (let i = 0; i < 7; i++) {
