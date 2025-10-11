@@ -76,13 +76,17 @@
             for (let i of my_plan) {
                 for (const iElement of i) {
                     if (iElement === null) {
-                        nulled = true;
+                        nulled = iElement;
                         break;
                     }
                 }
             }
             if (!nulled) {
+                alert("آفرین")
                 parent.postMessage(["main_end", my_plan])
+            }
+            else{
+                alert("no. there isn't " + nulled);
             }
         }
         weekday.innerHTML = days[index]
