@@ -41,7 +41,7 @@
         <div class="v11_253 v11_green"></div>
         <span class="v9_254">عربی</span><span class="v9_255">قبلا انتخابش کرده بودی</span>
         <span class="v11_254">عربی</span><span class="v11_255">قبلا انتخابش کرده بودی</span>
-        <div onclick="close_dialog()" class="v9_272"></div>
+        <div class="v9_272"></div>
     </div>
     <div id="onload" class="v9_237"></div>
 </div>
@@ -61,7 +61,7 @@
     const grid_desc_translate = ["v9_255", "v9_247", "v11_255", "v11_247"]
     let my_plan = [];
     for (let day = 0; day < days.length; day++) {
-        my_plan[day] = ["رایانه A", null, null, null, null, null, null];
+        my_plan[day] = [null, null, null, null, null, null, null];
     }
 
     function day(dy) {
@@ -114,10 +114,12 @@
             domc(grid_translate[i]).onclick = null;
             domc(grid_desc_translate[i]).onclick = null;
             domc(grid_name_translate[i]).onclick = null;
+            domc("v9_272").onclick = () => {close_dialog(null, lesson)};
             domc(grid_translate[i]).className = grid_translate[i];
             domc(grid_desc_translate[i]).className = grid_desc_translate[i];
             domc(grid_desc_translate[i]).innerHTML = "";
             domc(grid_name_translate[i]).className = grid_name_translate[i];
+
         }
 
         for (let i = 0; i < lessons.length; i++) {
@@ -147,9 +149,9 @@
                 }
                 else {
                     domc(grid_translate[i]).className = grid_translate[i] + " v11_green";
-                    domc(grid_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
-                    domc(grid_desc_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
-                    domc(grid_name_translate[i]).onclick = `close_dialog(${listen}, ${lesson})`;
+                    domc(grid_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                    domc(grid_desc_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                    domc(grid_name_translate[i]).onclick = () => {close_dialog(listen, lesson)};
                 }
             }
 
@@ -160,8 +162,10 @@
         const classes = document.getElementById("classes");
 
         classes.style.display = "none";
-        if (name !== null) {
-            my_plan[days[index]][lesson] = name;
+        if (lesson !== null) {
+            console.log(my_plan);
+            console.log(my_plan[index])
+            my_plan[index][lesson] = name;
             day(0)
         }
     }
