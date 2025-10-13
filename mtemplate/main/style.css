@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('vazirmatn.ttf') format('truetype');
+}
+body{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin: 0;
+}
+main{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    font-family: 'vazirmatn';
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mainElements{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-30px);
+}
+h1{
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 1px;
+}
+
+.helpP p{
+    margin: 2px;
+    font-size: 14px;
+}
+
+svg{
+    margin-bottom: 15px;
+}
+
+.buttons{
+    display: flex;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+button {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    font-family: 'Vazirmatn';
+    background-color: #151515;
+    width: 108px;
+    height: 37px;
+    border-radius: 50px;
+    border: 2px solid #000000;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#aiBtn {
+    background-color: #FF8400;
+    border-color: #e67701;
+}
+
+#aiBtn span {
+    position: relative;
+    z-index: 2;
+}
+
+#aiBtnCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    z-index: 1;
+    pointer-events: none;
+}

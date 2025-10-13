@@ -1,101 +1,68 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامه ریزی</title>
-    <link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" />
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Vazirmatn, sans-serif;
-        }
-
-        body {
-            background: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .card {
-            width: 360px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 24px;
-            text-align: center;
-        }
-
-        .icon {
-            width: 64px;
-            height: 64px;
-            background: #000;
-            margin: 0 auto 16px auto;
-            border-radius: 12px;
-        }
-
-        h2 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        p {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn.manual {
-            background: #141414;
-        }
-
-        .btn.manual:hover {
-            background: #333;
-        }
-
-        .btn.ai {
-            background: #09966b;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="card">
-    <div class="icon"></div>
-    <h2>برنامه هفته بعدت چیه؟</h2>
-    <p>میتونی از بین برنامه‌ریزی دستی و برنامه‌ریزی با هوش مصنوعی یدونه رو انتخاب کنی</p>
-    <div class="buttons">
-        <button id="manual"  class="btn manual">برنامه‌ریزی دستی</button>
-        <button class="btn ai" onclick="console.log('low')"  disabled>برنامه‌ریزی با AI</button>
-    </div>
-</div>
+    <main>
+        <div class="mainElements">
+            <svg width="74" height="58" viewBox="0 0 74 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.6293 48C24.5737 47.9892 24.0203 47.4695 24.0002 46.575C23.9971 46.3224 24.0303 46.0705 24.0989 45.8266C24.8728 43.0019 25.6921 40.1881 26.4211 37.352C26.7383 35.9766 27.43 34.7077 28.4247 33.6766C31.1374 30.9273 33.8058 28.1368 36.5503 25.418C43.7697 18.266 51.3411 11.4725 59.1112 4.88367C60.7982 3.45313 62.4582 1.99065 64.1842 0.605129C65.2113 -0.219087 65.6046 -0.20026 66.6419 0.655022C68.1216 1.87549 69.5474 3.15768 70.9825 4.42803C71.7551 5.1117 72.4958 5.829 73.2566 6.52515C74.2415 7.4265 74.2393 8.38954 73.3004 9.34585C71.8061 10.8675 70.3515 12.4244 68.8553 13.9437C68.3169 14.4906 67.6953 14.96 67.1319 15.4847C58.3167 23.6958 49.503 31.9084 40.6909 40.1224C39.2918 41.4255 37.8911 42.7278 36.4572 43.9947C36.0856 44.2993 35.6596 44.5355 35.2001 44.6922C32.4437 45.7171 29.6803 46.7239 26.9096 47.7124C26.4907 47.8383 26.0628 47.9345 25.6293 48ZM33.297 39.1801L62.9874 11.6006C62.3382 11.0125 61.7199 10.452 60.993 9.79304C50.7956 18.617 41.5189 28.2936 31.8783 37.7022L33.297 39.1801ZM36.0582 41.9226C45.9689 32.666 55.9168 23.6914 65.4175 14.3028L64.549 13.2334C54.3017 22.1543 44.555 31.3828 34.5681 40.3202L36.0582 41.9226ZM30.5372 36.5172C40.0112 26.8711 49.52 17.5311 59.4938 8.53621L58.4697 7.65686C48.3546 16.3967 38.7466 25.5847 29.5392 35.2086C29.7769 35.4954 29.9434 35.685 30.0964 35.8849C30.231 36.0592 30.3483 36.2448 30.5372 36.5172ZM71.4286 8.25068C69.7763 6.21064 66.2324 2.85523 65.1846 2.32414L60.5052 6.2618L67.5966 12.3128C68.896 10.9366 70.1449 9.61126 71.4286 8.25068ZM28.1599 36.4481C27.795 38.2622 27.4654 39.843 27.1718 41.4302C27.1358 41.6724 27.1967 41.9188 27.3421 42.1189C28.0161 42.9319 28.7313 43.713 29.4586 44.5358L33.8188 42.9245L28.1599 36.4481Z" fill="black"/><path d="M0.960292 44.7572C1.35724 45.0927 1.78335 45.3913 2.23335 45.6496C5.12788 47.1945 6.76855 49.0026 7.55443 51.5107C7.8677 52.3871 8.28376 53.224 8.79351 54.003C8.95032 54.2649 9.10725 54.5262 9.25617 54.791C9.58075 55.4263 10.057 55.9717 10.6419 56.3782C11.2271 56.785 11.9022 57.0394 12.6069 57.1195C14.1668 57.3379 15.748 57.3297 17.3015 57.095C17.9853 56.9644 18.6395 56.7127 19.2335 56.3513C20.6127 55.4463 21.6197 54.0729 22.0726 52.4791C22.387 51.523 22.5409 50.3015 20.9191 49.3323C20.8261 49.2767 20.7158 49.2585 20.6105 49.2816C20.5054 49.305 20.4132 49.3676 20.3531 49.457C20.1817 49.7113 20.017 49.96 19.856 50.2036C19.5087 50.7285 19.179 51.2252 18.8317 51.7019C17.824 53.0792 16.4093 53.6286 14.3785 53.4334C12.9861 53.2989 12.5153 52.3968 11.9063 50.9267L11.8755 50.8526C11.1966 49.0701 10.363 47.35 9.38427 45.7119C7.57426 42.8791 3.53816 41.9093 0.384333 43.5508C0.321296 43.5845 0.267874 43.6337 0.228752 43.6937C0.189631 43.7536 0.166165 43.8225 0.16044 43.8941C0.15534 43.9664 0.16844 44.0387 0.198742 44.1044C0.229262 44.1704 0.275856 44.2276 0.334057 44.2703C0.555694 44.4356 0.762658 44.5996 0.960292 44.7572Z" fill="black"/></svg>
+            <h1>برنامه هفته بعدت چیه؟</h1>
+            <div class="helpP">
+                <p>می‌تونی از بین برنامه ریزی دستی و برنامه ریزی با</p>
+                <p>هوش مصنوعی یدونه رو انتخاب کنی</p>
+            </div>
+            <div class="buttons">
+                <button id="manual">برنامه ریزی دستی</button>
+                <button id="aiBtn" class="aiBtn">
+                    <canvas id="aiBtnCanvas"></canvas>
+                    <span>Ai برنامه ریزی با</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    <div class="warnign"></div>
 </body>
 <script>
+    const canvas = document.getElementById('aiBtnCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function drawSnow() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // پس‌زمینه نارنجی
+        ctx.fillStyle = '#FF8400';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // افکت برفک سفید
+        const snowDensity = Math.floor(canvas.width * 1.8);
+        for (let i = 0; i < snowDensity; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.5})`;
+            ctx.fillRect(x, y, 1, 1);
+        }
+
+        requestAnimationFrame(drawSnow);
+    }
+
+    drawSnow();
+
+
     const manual = document.getElementById('manual');
     manual.addEventListener('click', () => {
-        parent.postMessage(["main_click", ""])
+    parent.postMessage(["main_click", ""])
     })
+
+
 </script>
 </html>
