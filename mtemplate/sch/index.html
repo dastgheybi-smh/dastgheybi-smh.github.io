@@ -1,201 +1,219 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap" rel="stylesheet" />
-    <link href="main.css" rel="stylesheet" />
-    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="v12_4">
-    <div class="v9_105"></div>
-    <div class="v9_189"></div>
-    <div  onclick="open_dialog(2)" class="v9_155"></div>
-    <span onclick="open_dialog(2)"  class="v9_156">زنگ سوم</span><span class="v9_157">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(1)" class="v9_158"></div>
-    <span onclick="open_dialog(1)"  class="v9_159">زنگ دوم</span><span class="v9_160">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(0)" class="v9_162"></div>
-    <span onclick="open_dialog(0)"  class="v9_163">زنگ اول</span><span class="v9_164">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(3)" class="v9_166"></div>
-    <span onclick="open_dialog(3)"  class="v9_167">زنگ چهارم</span><span class="v9_168">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(6)" class="v9_191"></div>
-    <span onclick="open_dialog(6)"  class="v9_192">زنگ آخر</span><span class="v9_193">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(5)" class="v9_195"></div>
-    <span onclick="open_dialog(5)"  class="v9_196">زنگ ششم</span><span class="v9_197">ساعت ۱:۳۰ تا ۲</span>
-    <div  onclick="open_dialog(4)" class="v9_198"></div>
-    <span onclick="open_dialog(4)"  class="v9_199">زنگ پنجم</span><span class="v9_200">ساعت ۱:۳۰ تا ۲</span>
-    <span class="v10_57">یکشنبه</span>
-    <button onclick="day(1)" class="v10_59"></button>
-    <span onclick="day(1)" class="v10_63">روز بعدی</span>
-    <button onclick="day(-1)" class="v10_60"></button>
-    <span onclick="day(-1)" class="v10_61">روز قبلی</span>
-    <div id="classes" style="display: none;">
-        <div onclick="close_dialog()" class="v9_237"></div>
-        <div class="v9_239"></div>
-        <span class="v9_241">بین کلاس های موجود یکی رو انتخاب کن</span>
-        <div class="name"></div>
-        <div class="v9_243 v11_green"></div>
-        <div class="v11_243 v11_red"></div>
-        <span class="v9_245">علوم</span><span class="v9_247">ظرفیت باقی مانده : ۵ نفر</span>
-        <span class="v11_245">علوم</span><span class="v11_247">ظرفیت باقی مانده : ۵ نفر</span>
-        <div class="v9_253 v11_green"></div>
-        <div class="v11_253 v11_green"></div>
-        <span class="v9_254">عربی</span><span class="v9_255">قبلا انتخابش کرده بودی</span>
-        <span class="v11_254">عربی</span><span class="v11_255">قبلا انتخابش کرده بودی</span>
-        <div class="v9_272"></div>
+
+    <main>
+        <div class="mainElements">
+            <div class="classbox v1" onclick="open_dialog(0)">
+                <h3 class="v11" onclick="open_dialog(0)">زنگ اول</h3>
+                <p class="v12" dir="rtl" onclick="open_dialog(0)">   ---   </p>
+            </div>
+            <div class="classbox v2" onclick="open_dialog(1)">
+                <h3 class="v21">زنگ دوم</h3>
+                <p class="v22" dir="rtl">   ---   </p>
+            </div>
+            <div class="classbox v3" onclick="open_dialog(2)">
+                <h3 class="v31">زنگ سوم</h3>
+                <p class="v32" dir="rtl">   ---   </p>
+            </div>
+            <div class="classbox v4" onclick="open_dialog(3)">
+                <h3 class="v41">زنگ چهارم</h3>
+                <p class="v42" dir="rtl">   ---   </p>
+            </div>
+            <div class="classbox v5" onclick="open_dialog(4)">
+                <h3 class="v51">زنگ پنجم</h3>
+                <p class="v52" dir="rtl">   ---   </p>
+            </div>
+            <div class="classbox v6" onclick="open_dialog(5)">
+                <h3 class="v61">زنگ ششم</h3>
+                <p class="v62" dir="rtl">   ---   </p>
+            </div>
+            <div class="classbox v7" onclick="open_dialog(6)">
+                <h3 class="v71">زنگ آخر</h3>
+                <p class="v72" dir="rtl">   ---   </p>
+            </div>
+        </div>
+        <footer>
+            <div class="nojoInfo">
+                <h3 class="v10_57">یکشنبه</h3>
+            </div>
+            <div style="width: 50%; display: flex; justify-content: flex-start; padding-left: 10px; gap: 2%;">
+                <button onclick="day(1)" >بعدی</button>
+                <button onclick="day(-1)" id="white">قبلی</button>
+            </div>
+        </footer>
+    </main>
+    <div class="cover" style="display: none" onclick="close_dialog()">
+        <div class="container_for_card">
+            <div class="header_for_card">
+                <h2>یک کلاس انتخاب کن</h2>
+                <button class="close-btn_for_card" title="لفو انتخاب" style="background-color: red; border: 2px solid red">
+                    لغو انتخاب
+                </button>
+            </div>
+
+            <div class="cards_for_card">
+                <div class="card_for_card" id="vc1"><h3 id="vcn1">علوم</h3> <p id="vcd1">ظرفیت: ۵ نفر</p></div>
+                <div class="card_for_card" id="vc2"><h3 id="vcn2">ریاضی</h3><p id="vcd2">ظرفیت: ۳ نفر</p></div>
+                <div class="card_for_card" id="vc3"><h3 id="vcn3">تاریخ</h3><p id="vcd3">ظرفیت: ۲ نفر</p></div>
+                <div class="card_for_card" id="vc4"><h3 id="vcn4">هنر</h3>  <p id="vcd4">ظرفیت: ۱ نفر</p></div>
+            </div>
+        </div>
     </div>
-    <div id="onload" class="v9_237"></div>
-</div>
-</body>
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const grade = params.get('grade');
-    let index = 1;
+    <div class="cover"></div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const grade = params.get('grade');
+        let index = 1;
 
-    const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
-    const weekday = document.getElementsByClassName("v10_57")[0];
-    const index_translate = ["v9_162", "v9_158", "v9_155", "v9_166", "v9_198", "v9_195", "v9_191"];
-    const times_translate = ["زنگ اول", "زنگ دوم", "زنگ سوم", "زنگ چهارم", "زنگ پنچم", "زنگ ششم", "زنگ آخر"];
-    const time_index_translate = ["v9_163", "v9_159", "v9_156", "v9_167", "v9_199", "v9_196", "v9_192"];
-    const grid_translate = ["v9_253", "v9_243", "v11_253", "v11_243"]
-    const grid_name_translate = ["v9_254", "v9_245", "v11_254", "v11_245"]
-    const grid_desc_translate = ["v9_255", "v9_247", "v11_255", "v11_247"]
-    let my_plan = [];
-    for (let day = 0; day < days.length; day++) {
-        my_plan[day] = [null, null, null, null, null, null, null];
-    }
-
-    function day(dy) {
-        index += dy;
-        if (index < 0) {
-            index -= dy;
-            return;
-        }
-        if (index > 4) {
-            index -= dy;
-            let nulled = false;
-            for (let i of my_plan) {
-                for (const iElement of i) {
-                    if (iElement === null) {
-                        nulled = "iElement";
-                        break;
-                    }
-                }
-            }
-            if (!nulled) {
-                alert("آفرین")
-                parent.postMessage(["main_end", my_plan])
-            }
-            else{
-                alert("no. there isn't " + nulled);
-            }
-        }
-        weekday.innerHTML = days[index]
-        for (let i = 0; i < 7; i++) {
-            let temp = my_plan[index];
-            console.log(temp);
-            document.getElementsByClassName(time_index_translate[i])[0].innerHTML = times_translate[i];
-            console.log(times_translate[i]);
-            if (temp[i] === null) {
-                document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#fff6df";
-                document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
-            }
-            else {
-                document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#d1ebe3";
-                document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#09966B";
-                document.getElementsByClassName(time_index_translate[i])[0].innerHTML += " - " + temp[i];
-                console.log(" - " + temp)
-            }
-        }
-    }
-
-    function domc(classname, ind=0) {
-        return document.getElementsByClassName(classname)[ind];
-    }
-
-    function open_dialog(lesson) {
-        const classes = document.getElementById("classes");
-
-        classes.style.display = "block";
-
-        let indexed_les = (index * 7) + lesson;
-        let lessons = plan[indexed_les];
-
-        console.log(lessons)
-
-        for (let i = 0; i < 4; i++){
-            domc(grid_translate[i]).style.display = "none";
-            domc(grid_desc_translate[i]).style.display = "none";
-            domc(grid_name_translate[i]).style.display = "none";
-            domc(grid_translate[i]).onclick = null;
-            domc(grid_desc_translate[i]).onclick = null;
-            domc(grid_name_translate[i]).onclick = null;
-            domc("v9_272").onclick = () => {close_dialog(null, lesson)};
-            domc(grid_translate[i]).className = grid_translate[i];
-            domc(grid_desc_translate[i]).className = grid_desc_translate[i];
-            domc(grid_desc_translate[i]).innerHTML = "";
-            domc(grid_name_translate[i]).className = grid_name_translate[i];
-
+        const days = ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه"];
+        const weekday = document.getElementsByClassName("v10_57")[0];
+        const index_translate = ["v1", "v2", "v3", "v4", "v5", "v6", "v7"];
+        const times_translate = ["زنگ اول", "زنگ دوم", "زنگ سوم", "زنگ چهارم", "زنگ پنچم", "زنگ ششم", "زنگ آخر"];
+        const time_index_translate = ["v11", "v21", "v31", "v41", "v51", "v61", "v71"];
+        const grid_translate = ["vc1", "vc2", "vc3", "vc4"]
+        const grid_name_translate = ["vcn1", "vcn2", "vcn3", "vcn4"]
+        const grid_desc_translate = ["vcd1", "vcd2", "vcd3", "vcd4"]
+        const time_name_translate = ["v12", "v22", "v32", "v42", "v52", "v62", "v72"];
+        let my_plan = [];
+        for (let day = 0; day < days.length; day++) {
+            my_plan[day] = [null, null, null, null, null, null, null];
         }
 
-        for (let i = 0; i < lessons.length; i++) {
-            let listen = lessons[i];
-            if (listen !== undefined){
-                domc(grid_translate[i]).style.display = "block";
-                domc(grid_desc_translate[i]).style.display = "block";
-                domc(grid_name_translate[i]).style.display = "block";
+        my_plan[0][0] = "ریاضی A"
 
-                domc(grid_name_translate[i]).innerHTML = listen;
-
-                let used = false;
-                for (let dy of my_plan) {
-                    for (let time of dy) {
-                        console.log(time + " = " + listen   );
-                        if (time === listen) {
-                            used = true;
+        function day(dy) {
+            index += dy;
+            if (index < 0) {
+                index -= dy;
+                return;
+            }
+            if (index > 4) {
+                index -= dy;
+                let nulled = false;
+                for (let i of my_plan) {
+                    for (const iElement of i) {
+                        if (iElement === null) {
+                            nulled = "iElement";
                             break;
                         }
                     }
                 }
-                console.log(used)
-                if (used) {
-                    domc(grid_translate[i]).className = grid_translate[i] + " v11_red"
-                    console.log(domc(grid_translate[i]).className)
-                    domc(grid_desc_translate[i]).innerHTML = "قبلا انتخابش کرده بودی!";
+                if (!nulled) {
+                    alert("آفرین")
+                    parent.postMessage(["main_end", my_plan])
                 }
-                else {
-                    domc(grid_translate[i]).className = grid_translate[i] + " v11_green";
-                    domc(grid_translate[i]).onclick = () => {close_dialog(listen, lesson)};
-                    domc(grid_desc_translate[i]).onclick = () => {close_dialog(listen, lesson)};
-                    domc(grid_name_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                else{
+                    alert("no. there isn't " + nulled);
                 }
             }
+            weekday.innerHTML = days[index]
+            for (let i = 0; i < 7; i++) {
+                let temp = my_plan[index];
 
+                document.getElementsByClassName(time_index_translate[i])[0].innerHTML = times_translate[i];
+
+                if (temp[i] === null) {
+                    document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#fff6df";
+                    document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#FF8300";
+                    domc(time_name_translate[i]).innerHTML = "  ---  ";
+                }
+                else {
+                    document.getElementsByClassName(index_translate[i])[0].style.backgroundColor = "#d1ebe3";
+                    document.getElementsByClassName(index_translate[i])[0].style.borderColor = "#09966B";
+                    domc(time_name_translate[i]).innerHTML = temp[i];
+
+                }
+            }
         }
-    }
 
-    function close_dialog(name=null, lesson=null) {
-        const classes = document.getElementById("classes");
-
-        classes.style.display = "none";
-        if (lesson !== null) {
-            console.log(my_plan);
-            console.log(my_plan[index])
-            my_plan[index][lesson] = name;
-            day(0)
+        function domi(idn){
+            return document.getElementById(idn);
         }
-    }
 
-    fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
-        .then(res => res.json())
-        .then(res => {
-            plan = res[parseInt(grade)];
-            parent.postMessage(["loading_plan", plan]);
-            console.log("plan is " + plan);
-            console.log("grade is " + grade);
-            console.log("grade type is" + typeof grade);
-            day(-1)
-            document.getElementById("onload").style.display = "none";
-        });
+        function domc(classname, ind=0) {
+            return document.getElementsByClassName(classname)[ind];
+        }
 
-</script>
-</html>
+        function open_dialog(lesson) {
+            const classes = domc("cover");
+
+            classes.style.display = "flex";
+
+            let indexed_les = (index * 7) + lesson;
+            let lessons = plan[indexed_les];
+
+
+            for (let i = 0; i < 4; i++){
+                domi(grid_translate[i]).style.display = "none";
+                domi(grid_desc_translate[i]).style.display = "none";
+                domi(grid_name_translate[i]).style.display = "none";
+                domi(grid_translate[i]).onclick = null;
+                domi(grid_desc_translate[i]).onclick = null;
+                domi(grid_name_translate[i]).onclick = null;
+                domc("close-btn_for_card").onclick = () => {close_dialog(null, lesson)};
+                domi(grid_desc_translate[i]).innerHTML = "";
+
+            }
+
+            for (let i = 0; i < lessons.length; i++) {
+                let listen = lessons[i];
+                if (listen !== undefined){
+                    domi(grid_translate[i]).style.display = "block";
+                    domi(grid_desc_translate[i]).style.display = "block";
+                    domi(grid_name_translate[i]).style.display = "block";
+
+                    domi(grid_name_translate[i]).innerHTML = listen;
+
+                    let used = false;
+                    for (let dy of my_plan) {
+                        for (let time of dy) {
+                            if (time === listen) {
+                                used = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (used) {
+                        domi(grid_translate[i]).style.border = "1px solid rgba(197,7,7,1)";
+                        domi(grid_translate[i]).style.backgroundColor = "rgba(197,7,7,0.14000000059604645)";
+                        domi(grid_desc_translate[i]).innerHTML = "قبلا انتخابش کرده بودی!";
+                    }
+                    else {
+                        domi(grid_translate[i]).style.border = "1px solid rgba(9,150,107,1)";
+                        domi(grid_translate[i]).style.backgroundColor = "rgba(9,150,107,0.12999999523162842)";
+                        domi(grid_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                        domi(grid_desc_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                        domi(grid_name_translate[i]).onclick = () => {close_dialog(listen, lesson)};
+                    }
+                }
+
+            }
+        }
+
+        function close_dialog(name=null, lesson=null) {
+            const classes = domc("cover");
+
+            classes.style.display = "none";
+            if (lesson !== null) {
+                my_plan[index][lesson] = name;
+                day(0)
+            }
+        }
+
+        fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
+            .then(res => res.json())
+            .then(res => {
+                plan = res[parseInt(grade)];
+                parent.postMessage(["loading_plan", plan]);
+                day(-1)
+                domc("cover", 1).style.display = "none"
+                console.log(plan)
+            });
+    </script>
+</body>
