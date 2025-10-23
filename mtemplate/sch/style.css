@@ -5,6 +5,7 @@
 body{
     place-items: center;
     height: 100vh;
+    font-family:'Vazirmatn',sans-serif;
     margin: 0;
 }
 main {
@@ -143,18 +144,8 @@ button {
     margin: 0;
 }
 
-body {
-    height: 100vh;box-sizing: border-box; margin:0; padding:0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg,#1c2a2a,#2d4141);
-    font-family:'Vazirmatn',sans-serif;
-    direction: rtl;
-}
-
 .container_for_card {
-    width: 280px;box-sizing: border-box; margin:0; padding:0;
+    width: 280px;box-sizing: border-box; margin:0; padding:0;direction: rtl;
     background:#fff;
     border-radius:20px;
     box-shadow:0 8px 20px rgba(0,0,0,0.2);
