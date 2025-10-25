@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('vazirmatn.ttf') format('truetype');
+    src: url('../Vazirmatn.ttf') format('truetype');
 }
 body{
     display: grid;
