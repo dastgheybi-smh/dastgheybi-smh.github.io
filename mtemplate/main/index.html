@@ -40,11 +40,11 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#FF8400';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        const snowDensity = Math.floor(canvas.width * 1);
+        const snowDensity = Math.floor(canvas.width);
         for (let i = 0; i < snowDensity; i++) {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
-            ctx.fillStyle = `rgba(255,255,255,${Math.random() * 1})`;
+            ctx.fillStyle = `rgba(255,255,255,${(Math.random())})`;
             ctx.fillRect(x, y, 1, 1);
         }
 
@@ -52,6 +52,11 @@
     }
 
     drawSnow();
+
+    const manual = document.getElementById('manual');
+    manual.addEventListener('click', () => {
+        parent.postMessage(["main_click", ""])
+    })
 
 </script>
 </html>
