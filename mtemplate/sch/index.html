@@ -80,9 +80,25 @@
         const grid_name_translate = ["vcn1", "vcn2", "vcn3", "vcn4"]
         const grid_desc_translate = ["vcd1", "vcd2", "vcd3", "vcd4"]
         const time_name_translate = ["v12", "v22", "v32", "v42", "v52", "v62", "v72"];
+        const persian_translate = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+        const english_translate = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         let my_plan = [];
         for (let day = 0; day < days.length; day++) {
             my_plan[day] = [null, null, null, null, null, null, null];
+        }
+
+        function entofa(text){
+            let new_text = "";
+            for (let char of text){
+                if (char in persian_translate){
+                    new_text += persian_translate[english_translate.indexOf(char)];
+                }
+                else{
+                    new_text += char;
+                }
+            }
+
+            return new_text;
         }
 
         function day(dy) {
@@ -168,7 +184,7 @@
 
                     console.log(listen)
                     domi(grid_name_translate[i]).innerHTML = listen.split("-")[0];
-                    domi(grid_desc_translate[i]). innerHTML = "ظرفیت باقی مانده : " + listen.split("-")[1]
+                    domi(grid_desc_translate[i]). innerHTML = entofa("ظرفیت  : " + listen.split("-")[1])
 
                     let used = false;
                     for (let dy of my_plan) {
