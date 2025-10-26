@@ -166,7 +166,9 @@
                     domi(grid_desc_translate[i]).style.display = "block";
                     domi(grid_name_translate[i]).style.display = "block";
 
-                    domi(grid_name_translate[i]).innerHTML = listen;
+                    console.log(listen)
+                    domi(grid_name_translate[i]).innerHTML = listen.split("-")[0];
+                    domi(grid_desc_translate[i]). innerHTML = "ظرفیت باقی مانده : " + listen.split("-")[1]
 
                     let used = false;
                     for (let dy of my_plan) {
