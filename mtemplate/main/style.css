@@ -59,11 +59,6 @@ button {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-button:hover:not(:disabled){
-    transform: scale(1.05);
 }
 
 button:disabled{
