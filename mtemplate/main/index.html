@@ -22,20 +22,26 @@
                 </button>
             </div>
         </div>
+        <div class="warning" id="warningBox">
+            !در دست ساخت است
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M7.5 15C9.48912 15 11.3968 14.2098 12.8033 12.8033C14.2098 11.3968 15 9.48912 15 7.5C15 5.51088 14.2098 3.60322 12.8033 2.1967C11.3968 0.790176 9.48912 0 7.5 0C5.51088 0 3.60322 0.790176 2.1967 2.1967C0.790176 3.60322 0 5.51088 0 7.5C0 9.48912 0.790176 11.3968 2.1967 12.8033C3.60322 14.2098 5.51088 15 7.5 15ZM7.5 3.21429C7.71312 3.21429 7.91751 3.29895 8.06821 3.44965C8.21891 3.60034 8.30357 3.80474 8.30357 4.01786V7.23214C8.30357 7.44526 8.21891 7.64965 8.06821 7.80035C7.91751 7.95105 7.71312 8.03571 7.5 8.03571C7.28688 8.03571 7.08249 7.95105 6.93179 7.80035C6.78109 7.64965 6.69643 7.44526 6.69643 7.23214V4.01786C6.69643 3.80474 6.78109 3.60034 6.93179 3.44965C7.08249 3.29895 7.28688 3.21429 7.5 3.21429ZM7.5 11.7857C7.78416 11.7857 8.05668 11.6728 8.25761 11.4719C8.45855 11.271 8.57143 10.9984 8.57143 10.7143C8.57143 10.4301 8.45855 10.1576 8.25761 9.95667C8.05668 9.75574 7.78416 9.64286 7.5 9.64286C7.21584 9.64286 6.94332 9.75574 6.74239 9.95667C6.54145 10.1576 6.42857 10.4301 6.42857 10.7143C6.42857 10.9984 6.54145 11.271 6.74239 11.4719C6.94332 11.6728 7.21584 11.7857 7.5 11.7857Z"
+                    fill="white"/>
+            </svg>
+        </div>
     </main>
     <div class="warnign"></div>
 </body>
 <script>
     const canvas = document.getElementById('aiBtnCanvas');
     const ctx = canvas.getContext('2d');
-
     function resizeCanvas() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-
     function drawSnow() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#FF8400';
@@ -50,13 +56,28 @@
 
         requestAnimationFrame(drawSnow);
     }
-
     drawSnow();
-
     const manual = document.getElementById('manual');
     manual.addEventListener('click', () => {
         parent.postMessage(["main_click", ""])
     })
+    const box = document.getElementById("warningBox");
+    const btn = document.getElementById("aiBtn");
+
+    let isActive = false;
+    function showWarning() {
+    if (isActive) return;
+    isActive = true;
+    btn.disabled = true;
+    box.classList.add("show");
+    setTimeout(() => box.classList.remove("show"), 2200);
+    setTimeout(() => {
+        isActive = false;
+        btn.disabled = false;
+    }, 2700);
+    }
+
+    btn.addEventListener("click", showWarning);
 
 </script>
 </html>
