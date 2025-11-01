@@ -169,7 +169,7 @@ function openDialog(lessonIndex) {
     const card = document.getElementById(`card${i+1}`);
     const nameEl = document.getElementById(`card-name${i+1}`);
     const capEl = document.getElementById(`card-cap${i+1}`);
-      
+
     if(lessonOptions[i]){
       const name = lessonOptions[i];
       const cap = capacity[currentIndex * 7 + lessonIndex][name];
@@ -207,7 +207,7 @@ function openDialog(lessonIndex) {
       card.style.display = 'none';
     }
   }
-}}
+}
 
 function closeDialog(){
   document.querySelector('.cover').classList.remove('active');
