@@ -80,7 +80,7 @@
 const params = new URLSearchParams(window.location.search);
 const grade = params.get('grade') || 0;
 let currentIndex = 0;
-const days = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه"];
+const days = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه"];
 const weekdayEl = document.getElementById('current-day');
 const lessonBoxes = document.getElementsByClassName('lesson-box');
 const lessonInfos = document.getElementsByClassName('lesson-info');
@@ -89,126 +89,166 @@ const nextBtn = document.getElementById("next-btn");
 let myPlan = Array(days.length).fill(0).map(() => Array(7).fill(null));
 let plan = [];
 
-function persianNumbers(str) {
-    return str.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
-}
+function persianNumbers(str){ return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]); }
 
-function updateSchedule() {
-    weekdayEl.textContent = days[currentIndex];
-    for (let i = 0; i < lessonBoxes.length; i++) {
-        const lessonData = myPlan[currentIndex][i];
-        lessonInfos[i].textContent = lessonData || "---";
-    }
-
-    if (currentIndex === 0) {
-        prevBtn.style.display = "none";
-        nextBtn.textContent = "روز بعدی";
-    } else if (currentIndex === days.length - 1) {
-        prevBtn.style.display = "inline-block";
-        nextBtn.textContent = "تمام";
+function updateSchedule(){
+  weekdayEl.textContent = days[currentIndex];
+  for(let i=0;i<lessonBoxes.length;i++){
+    const lessonData = myPlan[currentIndex][i];
+    lessonInfos[i].textContent = lessonData || "---";
+    if(lessonData){
+      lessonBoxes[i].style.backgroundColor = "#d1ebe3";
+      lessonBoxes[i].style.borderColor = "#09966B";
     } else {
-        prevBtn.style.display = "inline-block";
-        nextBtn.textContent = "روز بعدی";
+      lessonBoxes[i].style.backgroundColor = "#fff6df";
+      lessonBoxes[i].style.borderColor = "#FF8300";
     }
+  }
+
+  if(currentIndex === 0){
+    prevBtn.style.display = "none";
+    nextBtn.textContent = "روز بعدی";
+  } else if(currentIndex === days.length - 1){
+    prevBtn.style.display = "inline-block";
+    nextBtn.textContent = "تمام";
+  } else {
+    prevBtn.style.display = "inline-block";
+    nextBtn.textContent = "روز بعدی";
+  }
 }
 
-function changeDay(delta) {
-    const newIndex = currentIndex + delta;
-    if (newIndex < 0 || newIndex >= days.length) return;
-    currentIndex = newIndex;
-    updateSchedule();
+function changeDay(delta){
+  const newIndex = currentIndex + delta;
+  if(newIndex < 0 || newIndex >= days.length) return;
+  currentIndex = newIndex;
+  updateSchedule();
 }
 
 prevBtn.onclick = () => changeDay(-1);
 nextBtn.onclick = () => {
-    if (currentIndex < days.length - 1) changeDay(1);
-    else {
-        let nulled = false;
-        for (let i of myPlan) {
-            for (const item of i) {
-                if (item === null) { nulled = true; break; }
-            }
-        }
-        if (!nulled) { parent.postMessage(["main_end", myPlan]); }
+  if(currentIndex < days.length - 1) changeDay(1);
+  else {
+    const incomplete = myPlan.some(d => d.some(x => x === null));
+    if(incomplete){
+      alert("برنامه کامل نیست — لطفاً همه زنگ‌ها را انتخاب کن.");
+    } else {
+      parent.postMessage(["main_end", myPlan], "*");
     }
+  }
 };
 
-function openDialog(lessonIndex) {
-    const cover = document.querySelector('.cover');
-    cover.classList.add('active');
-
-    const lessonOptions = plan[currentIndex * 7 + lessonIndex] || [];
-    for (let i = 0; i < 4; i++) {
-        const card = document.getElementById(`card${i + 1}`);
-        const nameEl = document.getElementById(`card-name${i + 1}`);
-        const capEl = document.getElementById(`card-cap${i + 1}`);
-
-        if (lessonOptions[i]) {
-            const [name, cap] = lessonOptions[i].split('-');
-            nameEl.textContent = name;
-            capEl.textContent = persianNumbers("ظرفیت: " + cap);
-            card.style.display = 'flex';
-
-            let alreadySelected = false;
-            for (let d = 0; d < days.length; d++) {
-                for (let j = 0; j < 7; j++) {
-                    if (myPlan[d][j] && myPlan[d][j].split('-')[0] === name) {
-                        alreadySelected = true;
-                        break;
-                    }
-                }
-            }
-
-            if (parseInt(cap) === 0 || alreadySelected) {
-                card.style.backgroundColor = "#ff1f1f26";
-                card.style.borderColor = "#c70101";
-                card.style.cursor = "not-allowed";
-                card.onclick = null;
-            } else {
-                card.style.backgroundColor = "";
-                card.style.cursor = "pointer";
-                card.onclick = () => selectLesson(lessonIndex, lessonOptions[i]);
-            }
-        } else {
-            card.style.display = 'none';
-        }
-    }
+function resetCard(card){
+  card.style.display = '';
+  card.style.backgroundColor = '';
+  card.style.border = '';
+  card.style.borderColor = '';
+  card.style.cursor = 'pointer';
+  card.onclick = null;
 }
 
-function closeDialog() {
-    document.querySelector('.cover').classList.remove('active');
+function openDialog(lessonIndex){
+  const cover = document.querySelector('.cover');
+  cover.classList.add('active');
+
+  const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
+
+  // ریست کامل کارت‌ها قبل از پر کردن
+  for(let i=0;i<4;i++){
+    const card = document.getElementById(`card${i+1}`);
+    const nameEl = document.getElementById(`card-name${i+1}`);
+    const capEl = document.getElementById(`card-cap${i+1}`);
+    nameEl.textContent = '';
+    capEl.textContent = '';
+    resetCard(card);
+    card.style.display = 'none';
+  }
+
+  for(let i=0;i<4;i++){
+    const card = document.getElementById(`card${i+1}`);
+    const nameEl = document.getElementById(`card-name${i+1}`);
+    const capEl = document.getElementById(`card-cap${i+1}`);
+
+    if(lessonOptions[i]){
+      const raw = lessonOptions[i];
+      const parts = raw.split('-');
+      const name = parts[0] ? parts[0].trim() : raw;
+      let capRaw = parts[1] ? parts[1].trim() : "0";
+      capRaw = capRaw.replace(/[^\d]/g, '') || "0";
+      const cap = Number(capRaw);
+
+      nameEl.textContent = name;
+      capEl.textContent = persianNumbers("ظرفیت: " + capRaw);
+      card.style.display = 'flex';
+
+      let alreadySelected = false;
+      for(let d=0; d<myPlan.length; d++){
+        for(let j=0; j<myPlan[d].length; j++){
+          if(myPlan[d][j] && myPlan[d][j].split('-')[0] === name){
+            alreadySelected = true;
+            break;
+          }
+        }
+        if(alreadySelected) break;
+      }
+
+      if(cap === 0 || alreadySelected){
+        card.style.backgroundColor = "rgba(197,7,7,0.14)";
+        card.style.border = "1px solid rgba(197,7,7,1)";
+        card.style.borderColor = "#c70101";
+        card.style.cursor = "not-allowed";
+        card.onclick = () => {
+          if(alreadySelected) alert("این درس قبلاً انتخاب شده!");
+          else alert("ظرفیت این کلاس پر شده است!");
+        };
+      } else {
+        card.style.backgroundColor = '';
+        card.style.border = "1px solid #ff9c00";
+        card.style.cursor = "pointer";
+        card.onclick = () => selectLesson(lessonIndex, lessonOptions[i]);
+      }
+    } else {
+      card.style.display = 'none';
+    }
+  }
 }
 
-function selectLesson(lessonIndex, lessonData) {
-    for (let d = 0; d < days.length; d++) {
-        for (let i = 0; i < 7; i++) {
-            if (myPlan[d][i] && myPlan[d][i].split('-')[0] === lessonData.split('-')[0]) {
-                alert("!قبلا انتخاب شده");
-                return;
-            }
-        }
-    }
+function closeDialog(){
+  document.querySelector('.cover').classList.remove('active');
+}
 
-    const cap = parseInt(lessonData.split('-')[1]);
-    if (cap === 0) {
-        alert("!ظرفیت پر شده");
+function selectLesson(lessonIndex, lessonData){
+  const name = lessonData.split('-')[0].trim();
+  for(let d=0; d<myPlan.length; d++){
+    for(let i=0;i<myPlan[d].length;i++){
+      if(myPlan[d][i] && myPlan[d][i].split('-')[0] === name){
+        alert("این درس قبلاً انتخاب شده!");
         return;
+      }
     }
+  }
+  const capRaw = (lessonData.split('-')[1] || "0").replace(/[^\d]/g, '');
+  const cap = Number(capRaw || 0);
+  if(cap === 0){
+    alert("ظرفیت این کلاس پر شده!");
+    return;
+  }
+  myPlan[currentIndex][lessonIndex] = lessonData;
+  updateSchedule();
+  closeDialog();
 
-    myPlan[currentIndex][lessonIndex] = lessonData;
-    updateSchedule();
-    closeDialog();
-
-    let allFilled = myPlan.every(day => day.every(x => x !== null));
-    if (allFilled) { parent.postMessage(["main_end", myPlan]); }
+  const allFilled = myPlan.every(day => day.every(x => x !== null));
+  if(allFilled){
+    parent.postMessage(["main_end", myPlan], "*");
+  }
 }
 
 fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
-    .then(res => res.json())
-    .then(data => {
-        plan = data[parseInt(grade)];
-        parent.postMessage(["loading_plan", plan]);
-        updateSchedule();
-    });
+  .then(res => res.json())
+  .then(data => {
+    plan = data[parseInt(grade)];
+    try{ parent.postMessage(["loading_plan", plan], "*"); }catch(e){}
+    updateSchedule();
+  })
+  .catch(()=>{ updateSchedule(); });
 
 </script>
