@@ -65,7 +65,7 @@
     <div class="card-container" onclick="event.stopPropagation()">
         <div class="card-header">
             <h2>یک کلاس انتخاب کن</h2>
-            <button class="close-card-btn" onclick="closeDialog()" title="لغو انتخاب">لغو انتخاب</button>
+            <button class="close-card-btn" title="لغو انتخاب">لغو انتخاب</button>
         </div>
         <div class="cards-grid">
             <div class="card" id="card1"><h3 id="card-name1">علوم</h3><p id="card-cap1">ظرفیت: ۵ نفر</p></div>
@@ -148,11 +148,12 @@ function resetCard(card){
 }
 
 function openDialog(lessonIndex) {
-    updateData()
+    updateData();
     const cover = document.querySelector('.cover');
     cover.classList.add('active');
 
   const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
+  document.getElementsByClassName("close-card-btn")[0].onclick = () => {closeDialog(null, currentIndex*7 + lessonIndex);};
 
   // ریست کامل کارت‌ها قبل از پر کردن
   for(let i=0;i<4;i++){
@@ -223,10 +224,12 @@ function selectLesson(lessonIndex, lessonData) {
         }
     }
 
-    const cap = capacity[currentIndex * 7 + lessonIndex][name];
-    if (cap === 0) {
-        alert("!ظرفیت پر شده");
-        return;
+    if (lessonData !== null){
+        const cap = capacity[currentIndex * 7 + lessonIndex][name];
+        if (cap === 0) {
+            alert("!ظرفیت پر شده");
+            return;
+        }
     }
 
     myPlan[currentIndex][lessonIndex] = lessonData;
