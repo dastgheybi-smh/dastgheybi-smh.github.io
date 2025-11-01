@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ne.css">
 <title>برنامه درسی</title>
 </head>
 <body>
@@ -80,7 +80,7 @@
 const params = new URLSearchParams(window.location.search);
 const grade = params.get('grade') || 0;
 let currentIndex = 0;
-const days = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه"];
+const days = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه"];
 const weekdayEl = document.getElementById('current-day');
 const lessonBoxes = document.getElementsByClassName('lesson-box');
 const lessonInfos = document.getElementsByClassName('lesson-info');
@@ -89,21 +89,21 @@ const nextBtn = document.getElementById("next-btn");
 let myPlan = Array(days.length).fill(0).map(() => Array(7).fill(null));
 let plan = [];
 
-function persianNumbers(str){
+function persianNumbers(str) {
     return str.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 }
 
-function updateSchedule(){
+function updateSchedule() {
     weekdayEl.textContent = days[currentIndex];
-    for(let i=0;i<lessonBoxes.length;i++){
+    for (let i = 0; i < lessonBoxes.length; i++) {
         const lessonData = myPlan[currentIndex][i];
         lessonInfos[i].textContent = lessonData || "---";
     }
 
-    if(currentIndex === 0){
+    if (currentIndex === 0) {
         prevBtn.style.display = "none";
         nextBtn.textContent = "روز بعدی";
-    } else if(currentIndex === days.length - 1){
+    } else if (currentIndex === days.length - 1) {
         prevBtn.style.display = "inline-block";
         nextBtn.textContent = "تمام";
     } else {
@@ -112,77 +112,102 @@ function updateSchedule(){
     }
 }
 
-function changeDay(delta){
+function changeDay(delta) {
     const newIndex = currentIndex + delta;
-    if(newIndex < 0 || newIndex >= days.length) return;
+    if (newIndex < 0 || newIndex >= days.length) return;
     currentIndex = newIndex;
     updateSchedule();
 }
 
 prevBtn.onclick = () => changeDay(-1);
 nextBtn.onclick = () => {
-    if(currentIndex < days.length - 1) changeDay(1);
+    if (currentIndex < days.length - 1) changeDay(1);
     else {
         let nulled = false;
-        for(let i of myPlan){
-            for(const item of i){
-                if(item === null){nulled = true; break;}
+        for (let i of myPlan) {
+            for (const item of i) {
+                if (item === null) { nulled = true; break; }
             }
         }
-        if(!nulled){ parent.postMessage(["main_end", myPlan]); }
+        if (!nulled) { parent.postMessage(["main_end", myPlan]); }
     }
 };
 
-function openDialog(lessonIndex){
+function openDialog(lessonIndex) {
     const cover = document.querySelector('.cover');
     cover.classList.add('active');
 
-    const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
-    for(let i=0;i<4;i++){
-        const card = document.getElementById(`card${i+1}`);
-        const nameEl = document.getElementById(`card-name${i+1}`);
-        const capEl = document.getElementById(`card-cap${i+1}`);
+    const lessonOptions = plan[currentIndex * 7 + lessonIndex] || [];
+    for (let i = 0; i < 4; i++) {
+        const card = document.getElementById(`card${i + 1}`);
+        const nameEl = document.getElementById(`card-name${i + 1}`);
+        const capEl = document.getElementById(`card-cap${i + 1}`);
 
-        if(lessonOptions[i]){
+        if (lessonOptions[i]) {
+            const [name, cap] = lessonOptions[i].split('-');
+            nameEl.textContent = name;
+            capEl.textContent = persianNumbers("ظرفیت: " + cap);
             card.style.display = 'flex';
-            nameEl.textContent = lessonOptions[i].split('-')[0];
-            capEl.textContent = persianNumbers("ظرفیت: " + lessonOptions[i].split('-')[1]);
-            card.onclick = () => selectLesson(lessonIndex, lessonOptions[i]);
+
+            let alreadySelected = false;
+            for (let d = 0; d < days.length; d++) {
+                for (let j = 0; j < 7; j++) {
+                    if (myPlan[d][j] && myPlan[d][j].split('-')[0] === name) {
+                        alreadySelected = true;
+                        break;
+                    }
+                }
+            }
+
+            if (parseInt(cap) === 0 || alreadySelected) {
+                card.style.backgroundColor = "#ffb3b3";
+                card.style.cursor = "not-allowed";
+                card.onclick = null;
+            } else {
+                card.style.backgroundColor = "";
+                card.style.cursor = "pointer";
+                card.onclick = () => selectLesson(lessonIndex, lessonOptions[i]);
+            }
         } else {
             card.style.display = 'none';
         }
     }
 }
 
-function closeDialog(){
+function closeDialog() {
     document.querySelector('.cover').classList.remove('active');
 }
 
-function selectLesson(lessonIndex, lessonData){
-    for(let d=0; d<days.length; d++){
-        for(let i=0; i<7; i++){
-            if(myPlan[d][i] && myPlan[d][i].split('-')[0] === lessonData.split('-')[0]){
-                alert("این درس قبلاً انتخاب شده!");
+function selectLesson(lessonIndex, lessonData) {
+    for (let d = 0; d < days.length; d++) {
+        for (let i = 0; i < 7; i++) {
+            if (myPlan[d][i] && myPlan[d][i].split('-')[0] === lessonData.split('-')[0]) {
+                alert("!قبلا انتخاب شده");
                 return;
             }
         }
     }
+
+    const cap = parseInt(lessonData.split('-')[1]);
+    if (cap === 0) {
+        alert("!ظرفیت پر شده");
+        return;
+    }
+
     myPlan[currentIndex][lessonIndex] = lessonData;
     updateSchedule();
     closeDialog();
 
     let allFilled = myPlan.every(day => day.every(x => x !== null));
-    if(allFilled){ parent.postMessage(["main_end", myPlan]); }
+    if (allFilled) { parent.postMessage(["main_end", myPlan]); }
 }
 
 fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
-.then(res => res.json())
-.then(data => {
-    plan = data[parseInt(grade)];
-    parent.postMessage(["loading_plan", plan]);
-    updateSchedule();
-});
-</script>
+    .then(res => res.json())
+    .then(data => {
+        plan = data[parseInt(grade)];
+        parent.postMessage(["loading_plan", plan]);
+        updateSchedule();
+    });
 
-</body>
-</html>
+</script>
