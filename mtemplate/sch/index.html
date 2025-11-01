@@ -87,7 +87,8 @@ const lessonInfos = document.getElementsByClassName('lesson-info');
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 let myPlan = Array(days.length).fill(0).map(() => Array(7).fill(null));
-let plan = [];
+let plan = {};
+let capacity = {};
 
 function persianNumbers(str) {
     return str.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
