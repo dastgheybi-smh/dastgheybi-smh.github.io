@@ -169,23 +169,12 @@ function openDialog(lessonIndex) {
     const card = document.getElementById(`card${i+1}`);
     const nameEl = document.getElementById(`card-name${i+1}`);
     const capEl = document.getElementById(`card-cap${i+1}`);
-
-        if (lessonOptions[i]) {
-            const name = lessonOptions[i];
-            const cap = capacity[currentIndex * 7 + lessonIndex][name];
-            nameEl.textContent = name;
-            capEl.textContent = persianNumbers("ظرفیت: " + cap);
-            card.style.display = 'flex';
+      
     if(lessonOptions[i]){
-      const raw = lessonOptions[i];
-      const parts = raw.split('-');
-      const name = parts[0] ? parts[0].trim() : raw;
-      let capRaw = parts[1] ? parts[1].trim() : "0";
-      capRaw = capRaw.replace(/[^\d]/g, '') || "0";
-      const cap = Number(capRaw);
-
+      const name = lessonOptions[i];
+      const cap = capacity[currentIndex * 7 + lessonIndex][name];
       nameEl.textContent = name;
-      capEl.textContent = persianNumbers("ظرفیت: " + capRaw);
+      capEl.textContent = persianNumbers("ظرفیت: " + cap);
       card.style.display = 'flex';
 
       let alreadySelected = false;
