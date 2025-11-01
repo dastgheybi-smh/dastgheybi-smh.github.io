@@ -199,8 +199,6 @@ function selectLesson(lessonIndex, lessonData) {
     updateSchedule();
     closeDialog();
 
-    let allFilled = myPlan.every(day => day.every(x => x !== null));
-    if (allFilled) { parent.postMessage(["main_end", myPlan]); }
 }
 
 fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
