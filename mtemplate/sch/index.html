@@ -156,7 +156,7 @@ nextBtn.onclick = () => {
   if(currentIndex < days.length - 1) changeDay(1);
   else {
     const incomplete = myPlan.some(d => d.some(x => x === null));
-    if(incomplete) showAlert("برنامه کامل نیست. همه زنگ‌ها رو انتخاب کن", "error");
+    if(incomplete) showAlert(".همه زنگ ها انتخاب نشدن", "error");
     else parent.postMessage(["main_end", myPlan], "*");
   }
 };
@@ -255,7 +255,6 @@ function deleteLesson() {
   myPlan[currentIndex][opened_dialog_number] = null;
   updateSchedule();
   closeDialog();
-  showAlert("انتخاب حذف شد", "info");
 }
 
 // ===== بارگذاری داده‌ها =====
