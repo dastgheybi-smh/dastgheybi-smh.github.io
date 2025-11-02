@@ -77,6 +77,7 @@
 </div>
 
 <script>
+<script>
 const params = new URLSearchParams(window.location.search);
 const grade = params.get('grade') || 0;
 let currentIndex = 0;
@@ -96,27 +97,22 @@ function persianNumbers(str){ return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵
 function updateSchedule(){
   weekdayEl.textContent = days[currentIndex];
   for(let i=0;i<lessonBoxes.length;i++){
+    const infoEl = lessonInfos[i];
     const lessonData = myPlan[currentIndex][i];
-    lessonInfos[i].textContent = lessonData || "---";
+
     if(lessonData){
+      infoEl.innerHTML = `<strong>${lessonData}</strong><br><span style="color:#c70101;font-size:0.9em;">قبلاً انتخاب کردی</span>`;
       lessonBoxes[i].style.backgroundColor = "#d1ebe3";
       lessonBoxes[i].style.borderColor = "#09966B";
     } else {
+      infoEl.textContent = "---";
       lessonBoxes[i].style.backgroundColor = "#fff6df";
       lessonBoxes[i].style.borderColor = "#FF8300";
     }
   }
 
-  if(currentIndex === 0){
-    prevBtn.style.display = "none";
-    nextBtn.textContent = "روز بعدی";
-  } else if(currentIndex === days.length - 1){
-    prevBtn.style.display = "inline-block";
-    nextBtn.textContent = "تمام";
-  } else {
-    prevBtn.style.display = "inline-block";
-    nextBtn.textContent = "روز بعدی";
-  }
+  prevBtn.style.display = (currentIndex === 0) ? "none" : "inline-block";
+  nextBtn.textContent = (currentIndex === days.length - 1) ? "تمام" : "روز بعدی";
 }
 
 function changeDay(delta){
@@ -151,19 +147,17 @@ function resetCard(card){
 function openDialog(lessonIndex) {
   opened_dialog_number = lessonIndex;
   updateData();
-  const cover = document.querySelector('.cover');
-  cover.classList.add('active');
+  document.querySelector('.cover').classList.add('active');
 
   const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
 
-  // ریست کامل کارت‌ها قبل از پر کردن
   for(let i=0;i<4;i++){
     const card = document.getElementById(`card${i+1}`);
     const nameEl = document.getElementById(`card-name${i+1}`);
     const capEl = document.getElementById(`card-cap${i+1}`);
+    resetCard(card);
     nameEl.textContent = '';
     capEl.textContent = '';
-    resetCard(card);
     card.style.display = 'none';
   }
 
@@ -182,7 +176,7 @@ function openDialog(lessonIndex) {
       let alreadySelected = false;
       for(let d=0; d<myPlan.length; d++){
         for(let j=0; j<myPlan[d].length; j++){
-          if(myPlan[d][j] && myPlan[d][j].split('-')[0] === name){
+          if(myPlan[d][j] === name){
             alreadySelected = true;
             break;
           }
@@ -193,7 +187,6 @@ function openDialog(lessonIndex) {
       if(cap === 0 || alreadySelected){
         card.style.backgroundColor = "rgba(197,7,7,0.14)";
         card.style.border = "1px solid rgba(197,7,7,1)";
-        card.style.borderColor = "#c70101";
         card.style.cursor = "not-allowed";
         card.onclick = () => {
           if(alreadySelected) alert("این درس قبلاً انتخاب شده!");
@@ -203,10 +196,8 @@ function openDialog(lessonIndex) {
         card.style.backgroundColor = '';
         card.style.border = "1px solid #ff9c00";
         card.style.cursor = "pointer";
-        card.onclick = () => selectLesson(lessonIndex, lessonOptions[i]);
+        card.onclick = () => selectLesson(lessonIndex, name);
       }
-    } else {
-      card.style.display = 'none';
     }
   }
 }
@@ -218,25 +209,16 @@ function closeDialog(){
 function selectLesson(lessonIndex, lessonData) {
     for (let d = 0; d < days.length; d++) {
         for (let i = 0; i < 7; i++) {
-            if (myPlan[d][i] && myPlan[d][i] === lessonData) {
-                alert("!قبلا انتخاب شده");
+            if (myPlan[d][i] === lessonData) {
+                alert("این درس قبلاً در یک زنگ دیگر انتخاب شده!");
                 return;
             }
-        }
-    }
-
-    if (lessonData !== null){
-        const cap = capacity[currentIndex * 7 + lessonIndex][name];
-        if (cap === 0) {
-            alert("!ظرفیت پر شده");
-            return;
         }
     }
 
     myPlan[currentIndex][lessonIndex] = lessonData;
     updateSchedule();
     closeDialog();
-
 }
 
 function deleteLesson() {
@@ -261,4 +243,6 @@ function updateData() {
 }
 
 updateData();
+</script>
+
 </script>
