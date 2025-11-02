@@ -100,7 +100,7 @@ function updateSchedule(){
     const lessonData = myPlan[currentIndex][i];
 
     if(lessonData){
-      infoEl.innerHTML = `<strong>${lessonData}</strong>`;
+      infoEl.textContent = lessonData;
       lessonBoxes[i].style.backgroundColor = "#d1ebe3";
       lessonBoxes[i].style.borderColor = "#09966B";
     } else {
