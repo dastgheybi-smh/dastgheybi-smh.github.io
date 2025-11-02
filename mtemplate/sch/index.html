@@ -65,7 +65,7 @@
     <div class="card-container" onclick="event.stopPropagation()">
         <div class="card-header">
             <h2>یک کلاس انتخاب کن</h2>
-            <button class="close-card-btn" onclick="deleteLesson()" title="لغو انتخاب">لغو انتخاب</button>
+            <button class="close-card-btn" onclick="closeDialog()" title="لغو انتخاب">لغو انتخاب</button>
         </div>
         <div class="cards-grid">
             <div class="card" id="card1"><h3 id="card-name1">علوم</h3><p id="card-cap1">ظرفیت: ۵ نفر</p></div>
@@ -75,7 +75,8 @@
         </div>
     </div>
 </div>
-
+<div class="warning" id="site-warning"></div>
+</body>
 <script>
 const params = new URLSearchParams(window.location.search);
 const grade = params.get('grade') || 0;
@@ -91,7 +92,35 @@ let plan = {};
 let capacity = {};
 let opened_dialog_number = 0;
 
-function persianNumbers(str){ return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]); }
+function persianNumbers(str){ 
+  return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]); 
+}
+
+const warningEl = document.getElementById("site-warning");
+let isActive = false;
+let hideTimeout = null;
+
+function showWarning(message, type = "warning") {
+  if (!warningEl) return;
+
+  if (isActive) return;
+
+  isActive = true;
+  warningEl.textContent = message;
+  warningEl.className = "warning " + type;
+  warningEl.classList.add("show");
+
+  if (hideTimeout) clearTimeout(hideTimeout);
+
+  hideTimeout = setTimeout(() => {
+    warningEl.classList.remove("show");
+    setTimeout(() => {
+      isActive = false;
+    }, 500);
+  }, 2200);
+}
+
+const showAlert = showWarning;
 
 function updateSchedule(){
   weekdayEl.textContent = days[currentIndex];
@@ -125,7 +154,7 @@ nextBtn.onclick = () => {
   if(currentIndex < days.length - 1) changeDay(1);
   else {
     const incomplete = myPlan.some(d => d.some(x => x === null));
-    if(incomplete) alert("برنامه کامل نیست — لطفاً همه زنگ‌ها را انتخاب کن.");
+    if(incomplete) showAlert("برنامه کامل نیست. همه زنگ‌ها رو انتخاب کن", "error");
     else parent.postMessage(["main_end", myPlan], "*");
   }
 };
@@ -177,18 +206,18 @@ function openDialog(lessonIndex) {
         card.style.backgroundColor = "rgba(197,7,7,0.14)";
         card.style.border = "1px solid rgba(197,7,7,1)";
         card.style.cursor = "not-allowed";
-        card.onclick = () => alert("این درس قبلاً انتخاب شده!");
+        card.onclick = () => showAlert("!این درس قبلاً انتخاب شده", "error");
       } else if(cap === 0){
         capEl.textContent = persianNumbers("ظرفیت: 0");
         card.style.backgroundColor = "rgba(197,7,7,0.14)";
         card.style.border = "1px solid rgba(197,7,7,1)";
         card.style.cursor = "not-allowed";
-        card.onclick = () => alert("ظرفیت این کلاس پر شده است!");
+        card.onclick = () => showAlert("!ظرفیت این کلاس پر شده است", "error");
       } else {
         capEl.textContent = persianNumbers("ظرفیت: " + cap);
         card.style.backgroundColor = '';
         card.style.border = "1px solid #ff9c00";
-        card.style.cursor = "pointer";
+        card.style.cursor = 'pointer';
         card.onclick = () => selectLesson(lessonIndex, name);
       }
     }
@@ -201,9 +230,10 @@ function closeDialog(){
 
 function selectLesson(lessonIndex, lessonData) {
   for (let d = 0; d < days.length; d++) {
-      for (let i = 0; i < 7; i++) {
-          if (myPlan[d][i] === lessonData) return alert("این درس قبلاً در یک زنگ دیگر انتخاب شده!");
-      }
+    for (let i = 0; i < 7; i++) {
+      if (myPlan[d][i] === lessonData) 
+        return showAlert("!این درس قبلاً انتخاب شده", "error");
+    }
   }
   myPlan[currentIndex][lessonIndex] = lessonData;
   updateSchedule();
@@ -218,13 +248,15 @@ function deleteLesson() {
 
 function updateData() {
   fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
-      .then(res => res.json())
-      .then(data => { plan = data[parseInt(grade)]; parent.postMessage(["loading_plan", plan]); });
+    .then(res => res.json())
+    .then(data => { plan = data[parseInt(grade)]; parent.postMessage(["loading_plan", plan]); });
   fetch('https://live-box.storage.c2.liara.space/capacity.json')
-      .then(res => res.json())
-      .then(data => { capacity = data[parseInt(grade)]; });
+    .then(res => res.json())
+    .then(data => { capacity = data[parseInt(grade)]; });
   updateSchedule();
 }
 
 updateData();
+
 </script>
+
