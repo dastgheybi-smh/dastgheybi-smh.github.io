@@ -65,7 +65,7 @@
     <div class="card-container" onclick="event.stopPropagation()">
         <div class="card-header">
             <h2>یک کلاس انتخاب کن</h2>
-            <button class="close-card-btn" title="لغو انتخاب">لغو انتخاب</button>
+            <button class="close-card-btn" onclick="deleteLesson()" title="لغو انتخاب">لغو انتخاب</button>
         </div>
         <div class="cards-grid">
             <div class="card" id="card1"><h3 id="card-name1">علوم</h3><p id="card-cap1">ظرفیت: ۵ نفر</p></div>
@@ -89,6 +89,7 @@ const nextBtn = document.getElementById("next-btn");
 let myPlan = Array(days.length).fill(0).map(() => Array(7).fill(null));
 let plan = {};
 let capacity = {};
+let opened_dialog_number = 0;
 
 function persianNumbers(str){ return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]); }
 
@@ -148,12 +149,12 @@ function resetCard(card){
 }
 
 function openDialog(lessonIndex) {
-    updateData();
-    const cover = document.querySelector('.cover');
-    cover.classList.add('active');
+  opened_dialog_number = lessonIndex;
+  updateData();
+  const cover = document.querySelector('.cover');
+  cover.classList.add('active');
 
   const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
-  document.getElementsByClassName("close-card-btn")[0].onclick = () => {closeDialog(null, currentIndex*7 + lessonIndex);};
 
   // ریست کامل کارت‌ها قبل از پر کردن
   for(let i=0;i<4;i++){
@@ -217,7 +218,7 @@ function closeDialog(){
 function selectLesson(lessonIndex, lessonData) {
     for (let d = 0; d < days.length; d++) {
         for (let i = 0; i < 7; i++) {
-            if (myPlan[d][i] && myPlan[d][i].split('-')[0] === lessonData) {
+            if (myPlan[d][i] && myPlan[d][i] === lessonData) {
                 alert("!قبلا انتخاب شده");
                 return;
             }
@@ -236,6 +237,12 @@ function selectLesson(lessonIndex, lessonData) {
     updateSchedule();
     closeDialog();
 
+}
+
+function deleteLesson() {
+    myPlan[currentIndex][opened_dialog_number] = null;
+    updateSchedule();
+    closeDialog();
 }
 
 function updateData() {
