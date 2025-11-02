@@ -96,13 +96,13 @@ function persianNumbers(str){
   return String(str).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]); 
 }
 
+// ===== هشدار کوچک =====
 const warningEl = document.getElementById("site-warning");
 let isActive = false;
 let hideTimeout = null;
 
 function showWarning(message, type = "warning") {
   if (!warningEl) return;
-
   if (isActive) return;
 
   isActive = true;
@@ -122,6 +122,7 @@ function showWarning(message, type = "warning") {
 
 const showAlert = showWarning;
 
+// ===== بروزرسانی جدول =====
 function updateSchedule(){
   weekdayEl.textContent = days[currentIndex];
   for(let i=0;i<lessonBoxes.length;i++){
@@ -142,6 +143,7 @@ function updateSchedule(){
   nextBtn.textContent = (currentIndex === days.length - 1) ? "تمام" : "روز بعدی";
 }
 
+// ===== تغییر روز =====
 function changeDay(delta){
   const newIndex = currentIndex + delta;
   if(newIndex < 0 || newIndex >= days.length) return;
@@ -159,6 +161,7 @@ nextBtn.onclick = () => {
   }
 };
 
+// ===== باز کردن دیالوگ انتخاب =====
 function resetCard(card){
   card.style.display = '';
   card.style.backgroundColor = '';
@@ -172,6 +175,7 @@ function openDialog(lessonIndex) {
   opened_dialog_number = lessonIndex;
   updateData();
   document.querySelector('.cover').classList.add('active');
+
   const lessonOptions = plan[currentIndex*7 + lessonIndex] || [];
   for(let i=0;i<4;i++){
     const card = document.getElementById(`card${i+1}`);
@@ -182,15 +186,18 @@ function openDialog(lessonIndex) {
     capEl.textContent = '';
     card.style.display = 'none';
   }
+
   for(let i=0;i<4;i++){
     const card = document.getElementById(`card${i+1}`);
     const nameEl = document.getElementById(`card-name${i+1}`);
     const capEl = document.getElementById(`card-cap${i+1}`);
+
     if(lessonOptions[i]){
       const name = lessonOptions[i];
       const cap = capacity[currentIndex * 7 + lessonIndex][name];
       nameEl.textContent = name;
       card.style.display = 'flex';
+
       let alreadySelected = false;
       for(let d=0; d<myPlan.length; d++){
         for(let j=0; j<myPlan[d].length; j++){
@@ -201,6 +208,7 @@ function openDialog(lessonIndex) {
         }
         if(alreadySelected) break;
       }
+
       if(alreadySelected){
         capEl.textContent = "قبلاً انتخاب شده";
         card.style.backgroundColor = "rgba(197,7,7,0.14)";
@@ -224,10 +232,12 @@ function openDialog(lessonIndex) {
   }
 }
 
+// ===== بستن دیالوگ =====
 function closeDialog(){
   document.querySelector('.cover').classList.remove('active');
 }
 
+// ===== انتخاب درس =====
 function selectLesson(lessonIndex, lessonData) {
   for (let d = 0; d < days.length; d++) {
     for (let i = 0; i < 7; i++) {
@@ -240,21 +250,33 @@ function selectLesson(lessonIndex, lessonData) {
   closeDialog();
 }
 
+// ===== حذف انتخاب فعلی =====
 function deleteLesson() {
   myPlan[currentIndex][opened_dialog_number] = null;
   updateSchedule();
   closeDialog();
+  showAlert("انتخاب حذف شد", "info");
 }
 
+// ===== بارگذاری داده‌ها =====
 function updateData() {
   fetch('https://live-box.storage.c2.liara.space/sch_sch.json')
     .then(res => res.json())
-    .then(data => { plan = data[parseInt(grade)]; parent.postMessage(["loading_plan", plan]); });
+    .then(data => { 
+      plan = data[parseInt(grade)];
+      parent.postMessage(["loading_plan", plan]); 
+    });
+
   fetch('https://live-box.storage.c2.liara.space/capacity.json')
     .then(res => res.json())
     .then(data => { capacity = data[parseInt(grade)]; });
+
   updateSchedule();
 }
+
+// اتصال دکمه لغو انتخاب
+const cancelBtn = document.querySelector(".close-card-btn");
+if (cancelBtn) cancelBtn.addEventListener("click", deleteLesson);
 
 updateData();
 
