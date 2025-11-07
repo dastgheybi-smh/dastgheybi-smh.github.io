@@ -156,8 +156,17 @@ nextBtn.onclick = () => {
   if(currentIndex < days.length - 1) changeDay(1);
   else {
     const incomplete = myPlan.some(d => d.some(x => x === null));
+
     if(incomplete) showAlert(".همه زنگ ها انتخاب نشدن", "error");
-    else parent.postMessage(["main_end", myPlan], "*");
+    else {
+        let my_plan = [];
+        for (let dy of myPlan) {
+            for (let died of dy) {
+                my_plan.push(died)
+            }
+        }
+        parent.postMessage(["main_end", my_plan.join(",")], "*")
+    }
   }
 };
 
