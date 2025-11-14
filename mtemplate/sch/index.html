@@ -80,6 +80,7 @@
 <script>
 const params = new URLSearchParams(window.location.search);
 const grade = params.get('grade') || 0;
+const isadmin = params.get('admin') || false;
 let currentIndex = 0;
 const days = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه"];
 const weekdayEl = document.getElementById('current-day');
@@ -224,7 +225,7 @@ function openDialog(lessonIndex) {
         card.style.border = "1px solid rgba(197,7,7,1)";
         card.style.cursor = "not-allowed";
         card.onclick = () => showAlert("!این درس قبلاً انتخاب شده", "error");
-      } else if(cap === 0){
+      } else if(cap === 0 && !isadmin){
         capEl.textContent = persianNumbers("ظرفیت: 0");
         card.style.backgroundColor = "rgba(197,7,7,0.14)";
         card.style.border = "1px solid rgba(197,7,7,1)";

@@ -43,7 +43,7 @@
         sent_data = event.data[1];
 
          if (sender === "main_click"){
-            redirect("sch?grade=" + grade);
+            redirect("sch?grade=" + grade + "&admin=" + isadmin);
         }
 
         else if (sender === "loading_plan"){
@@ -53,14 +53,18 @@
 
         else if (sender === "main_end"){
             my_plan = sent_data
-            window.Bale.WebApp.sendData(my_plan)
-            window.Bale.WepApp.close()
+            try{
+                window.Bale.WebApp.sendData(my_plan)
+                window.Bale.WepApp.close()
+            }
+            catch (err){}
             redirect("end")
         }
     })
 
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
+    const isadmin = params.get('admin');
     redirect("main");
 
 
