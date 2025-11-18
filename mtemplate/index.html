@@ -43,7 +43,7 @@
         sent_data = event.data[1];
 
          if (sender === "main_click"){
-            redirect("sch?grade=" + grade + "&admin=" + isadmin);
+             redirect("sch?grade=" + grade);
         }
 
         else if (sender === "loading_plan"){
@@ -64,7 +64,6 @@
 
     const params = new URLSearchParams(window.location.search);
     const grade = params.get('grade');
-    const isadmin = params.get('admin');
     redirect("main");
 
 
