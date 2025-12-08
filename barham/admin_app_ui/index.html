@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>صفحه کنترل</title>
+
+
+    <style>
+        @font-face {
+            font-family: 'Vazir';
+            src: url('Vazirmatn-Medium.woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Vazir, sans-serif;
+    }
+
+    body {
+        width: 100vw;
+        min-height: 100vh;
+        background-color: #ffd09b;
+        display: flex;
+        justify-content: center;
+        padding: 2vh 0;
+    }
+
+    .wrapper {
+        width: 95vw;
+        min-height: 96vh;
+        border-radius: 2vw;
+        background-color: #f9b871;
+        padding: 2vh 2vw;
+        display: flex;
+        align-items: center;
+    }
+
+    /* نوار بالایی */
+    .top-bar {
+        width: 100%;
+        height: 10vh;
+        background-color: #b7f1b2;
+        border-radius: 1.5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3vh;
+    }
+
+    /* ساختار دو ستونی */
+    .main {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 70% 28%;
+        gap: 2%;
+        height: 78vh;
+    }
+
+    /* پنل بزرگ جدول */
+    .panel {
+        background-color: #ffeaa0;
+        border-radius: 2vw;
+        border: 0.4vw solid #f2a03f;
+        padding: 2vh 2vw;
+        overflow-y: auto;
+    }
+
+    /* جدول */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        border-radius: 1vw;
+        overflow: hidden;
+        font-size: 2vh;
+    }
+
+    th, td {
+        padding: 1vh 1vw;
+        border-bottom: 0.2vh solid #f2d089;
+        text-align: center;
+    }
+
+    th {
+        background-color: #fff8d5;
+        font-size: 2.2vh;
+    }
+
+    /* ستون دکمه */
+    .action-btn {
+        background-color: #ffcf7a;
+        border: 0.3vh solid #ffb13b;
+        padding: 0.6vh 1vw;
+        border-radius: 0.7vw;
+        cursor: pointer;
+        font-size: 1.9vh;
+    }
+
+    /* دکمه‌ها در ستون راست */
+    .side-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    tr.written td {
+        background-color: #a6ffa0;
+    }
+
+    tr.unwritten td {
+        background-color: #ffa0a0;
+    }
+
+    .checkbox-label {
+        font-size: 2.1vh;
+        color: #d03434;
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+    }
+
+    .checkbox-label input {
+        width: 3vh;
+        height: 3vh;
+        accent-color: #ff9b9b;
+    }
+
+    .btn {
+        width: 100%;
+        height: 6vh;
+        font-size: 2.2vh;
+        border-radius: 1vw;
+        cursor: pointer;
+        background-color: #ffda7c;
+        border: 0.4vh solid #e79a22;
+    }
+
+    .btn-green {
+        background-color: #b7f1b2;
+        border-color: #38a35f;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div class="main">
+
+        <!-- پنل جدول -->
+        <div class="panel">
+            <table>
+                <tr>
+                    <th>اسم</th>
+                    <th>نام کاربری</th>
+                    <th>عملیات</th>
+                </tr>
+
+                <!-- نمونه ردیف -->
+                <tr class="written">
+                    <td>علی رضایی</td>
+                    <td>0152456321</td>
+                    <td><button class="action-btn">تغییر / دیدن</button></td>
+                </tr>
+                <tr class="unwritten">
+                    <td>محسن محمدی</td>
+                    <td>0164325974</td>
+                    <td><button class="action-btn">تغییر / دیدن</button></td>
+                </tr>
+                <tr class="written">
+                    <td>قاسم علوی</td>
+                    <td>0025692578</td>
+                    <td><button class="action-btn">تغییر / دیدن</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- دکمه‌های راست -->
+        <div class="side-buttons">
+
+            <label class="checkbox-label">
+                <input type="checkbox" />
+                برنامه‌ریزی
+            </label>
+
+            <label class="checkbox-label">
+                <input type="checkbox" />
+                برنامه‌ریزی تکراری
+            </label>
+
+            <button class="btn">هفته جدید</button>
+            <button class="btn">برنامه جدید</button>
+            <button class="btn">خروجی برنامه‌ریزی</button>
+
+            <button class="btn btn-green">افزودن دانش‌آموز</button>
+            <button class="btn btn-green">حذف تمامی دانش‌آموزان</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script>
+    fetch("/")
+
+    async function sendToServer(data) {
+    try {
+        let response = await fetch("/api/process", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        return await response.json();
+
+    } catch (err) {
+        console.error("خطا:", err);
+        return null;
+    }
+}
+</script>
+</html>
